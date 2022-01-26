@@ -1,0 +1,14 @@
+{
+  "name": "InfluxDB-remote",
+  "type": "influxdb",
+  "access": "proxy",
+  "url": "https://dbod-cbankeu.cern.ch:8081",
+  "database": "prometheus_data",
+  "jsonData": {
+    "tlsSkipVerify": true
+  },
+  "user": "admin",
+  "secureJsonData": {
+    "password": ""
+  }
+}

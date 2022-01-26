@@ -1,0 +1,8 @@
+*/old*
+*/__pycache__*
+gcp/*
+aws/*
+yandex/*
+!gcp/*.py
+!aws/*.py
+!yandex/*.py

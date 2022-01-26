@@ -1,0 +1,31 @@
+################################## PARAMETERS DEFINITION
+parameters:
+  - name: "ADMIN_USER"
+    description: "CERN username of the admin of the Grafana instance. It can be only one."
+    required: true
+  - name: "AUTHORIZED_GROUPS"
+    description: "E-group(s) with Viewer access to the Grafana instance. It can be more than one if separated by spaces. "
+    value: 'it-dep-di-efp'
+    required: true
+  - name: "ADMIN_PASSWORD"
+    description: "Please leave blank: a random password will be generated. Admin password is useless when using SSO. "
+    generate: "expression"
+    from: "[a-zA-Z0-9]{12}"
+  - name: "DB_NAME"
+    value: "prometheus_data"
+  - name: "DB_USERNAME"
+    required: true
+  - name: "DB_PASSWORD"
+    required: true
+  - name: "SCRAPE_INTERVAL"
+    value: "30s"
+  - name: "SCRAPE_TIMEOUT"
+    value: "30s"
+  - name: "AWS_EXPORTER_ACC_KEY"
+    required: true
+  - name: "AWS_EXPORTER_SEC_KEY"
+    required: true
+  - name: "EXPORTER_IMAGE"
+    value: 'os4'
+  - name: "GCP_AUTH"
+    required: true

@@ -1,0 +1,682 @@
+kind: Template
+apiVersion: template.openshift.io/v1 # v1
+metadata:
+  name: "grafana"
+  creationTimestamp: null
+  annotations:
+    description: "Cloudbank consumption monitoring platform."
+    tags: "grafana"
+    # Prevent end users from binding against services provisioned by this template
+    # See: https://docs.okd.io/latest/dev_guide/templates.html#writing-marking-templates-as-bindable
+    # template.openshift.io/bindable: "false"
+labels:
+  template: "grafana" #this label will applied to all objects created from this template
+objects:
+
+################################## MAIN ROUTE
+- kind: Route
+  apiVersion: v1
+  metadata:
+    name: "cern-sso-proxy"
+    labels:
+      # This will take of the route registration
+      cern.ch/sso-registration: Shibboleth
+  spec:
+    to:
+      kind: Service
+      name: "cern-sso-proxy"
+    port:
+      targetPort: 8081
+    tls:
+      termination: "edge"
+      insecureEdgeTerminationPolicy: Redirect
+
+################################## CERN SSO SERVICE
+- kind: Service
+  apiVersion: v1
+  metadata:
+    name: "cern-sso-proxy"
+  spec:
+    ports:
+      - name: "8081-tcp"
+        protocol: "TCP"
+        port: 8081
+        targetPort: 8081
+    selector:
+      name: "cern-sso-proxy"
+    portalIP: ""
+    type: "ClusterIP"
+    sessionAffinity: "None"
+
+################################## CERN SSO CONFIGURATION
+- kind: ConfigMap
+  apiVersion: v1
+  metadata:
+    name: "cern-sso-proxy"
+  data:
+    # This configMap contains the configurable files a user has to provide to
+    # define the proxy and authorization of the server.
+    # IMPORTANT! For grafana we sent the username in X-Remote-User instead
+    # of the e-mail address as we normally do
+    authorize.conf: |2
+      # Make sure clients cannot fake authentication by injecting a X-Remote-User header
+      RequestHeader unset X-Remote-User
+      <Location "/">
+        ShibRequestSetting requireSession 1
+        AuthType shibboleth
+        <RequireALL>
+          Require valid-user
+          Require shib-attr ADFS_GROUP ${AUTHORIZED_GROUPS}
+        </RequireALL>
+        # Make the value of REMOTE_USER (the email address) available to the backend
+        # application as HTTP header X-Remote-User
+        #RequestHeader set X-Remote-User %{REMOTE_USER}e
+        # Use the following instead to pass login name rather than email address
+        RequestHeader set X-Remote-User %{ADFS_LOGIN}e
+      </Location>
+    proxy.conf: |2
+      <Location "/">
+        ProxyPreserveHost On
+        ProxyPass http://${SERVICE_HOST}:${SERVICE_PORT}/
+      </Location>
+- kind: ConfigMap
+  apiVersion: v1
+  metadata:
+    name: "cern-sso-shib"
+  data:
+    # The shibboleth2.xml configmap is empty by default so the one from the image
+    # will be taken instead
+    shibboleth2.xml: ""
+
+################################## CERN SSO DEPLOYMENT
+- kind: DeploymentConfig
+  apiVersion: v1
+  metadata:
+    name: "cern-sso-proxy"
+  spec:
+    strategy:
+      type: "Rolling"
+    triggers:
+    - type: "ConfigChange"
+    - type: "ImageChange"
+      imageChangeParams:
+        automatic: true
+        containerNames:
+        - "httpd"
+        from:
+          kind: ImageStreamTag
+          name: "cern-sso-proxy:stable"
+          namespace: openshift
+    - type: "ImageChange"
+      imageChangeParams:
+        automatic: true
+        containerNames:
+        - "shibd"
+        from:
+          kind: ImageStreamTag
+          name: "cern-sso-proxy:stable"
+          namespace: openshift
+    replicas: 1
+    selector:
+      name: "cern-sso-proxy"
+    template:
+      metadata:
+        labels:
+          name: "cern-sso-proxy"
+      spec:
+        containers:
+          -
+            name: "httpd"
+            image: "cern-sso-proxy:stable"
+            readinessProbe:
+              failureThreshold: 3
+              periodSeconds: 5
+              successThreshold: 1
+              tcpSocket:
+                port: 8081
+              timeoutSeconds: 1
+            resources:
+              limits:
+                cpu: 250m
+                memory: 100Mi
+              requests:
+                cpu: 25m
+                memory: 50Mi
+            volumeMounts:
+              # Shared mount for communication between both containers
+            - mountPath: /var/run/shibboleth
+              name: shared
+              # Mount with apache configurable files
+            - mountPath: /etc/httpd/conf.d/configurable
+              name: apache
+            - mountPath: /tmp/configmap
+              name: shib
+            env:
+            -
+              name: "NAMESPACE"
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+            -
+              name: SERVICE_NAME
+              value: "grafana"
+            -
+              name: HOSTNAME_FQDN
+              value: ""
+            terminationMessagePath: "/dev/termination-log"
+            imagePullPolicy: "IfNotPresent"
+            capabilities: {}
+            securityContext:
+              capabilities: {}
+              privileged: false
+          -
+            name: "shibd"
+            command: # Shibd container has a different entrypoint
+            - /shib.sh
+            image: "cern-sso-proxy:stable"
+            resources:
+              limits:
+                cpu: 250m
+                memory: 100Mi
+              requests:
+                cpu: 25m
+                memory: 50Mi
+            volumeMounts:
+              # Shared mount for communication between both containers
+            - mountPath: /var/run/shibboleth
+              name: shared
+            - mountPath: /tmp/configmap
+              name: shib
+            env:
+            -
+              name: "NAMESPACE"
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+            -
+              name: HOSTNAME_FQDN
+              value: ""
+            terminationMessagePath: "/dev/termination-log"
+            imagePullPolicy: "IfNotPresent"
+            capabilities: {}
+            securityContext:
+              capabilities: {}
+              privileged: false
+        volumes:
+          -
+            emptyDir: {}
+            name: shared
+          - configMap:
+              name: cern-sso-proxy
+            name: apache
+          - configMap:
+              name: cern-sso-shib
+            name: shib
+        restartPolicy: "Always"
+        dnsPolicy: "ClusterFirst"
+
+################################## GRAFANA SERVICE
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: grafana
+  spec:
+    ports:
+    - name: 3000-tcp
+      port: 3000
+      protocol: TCP
+      targetPort: 3000
+    selector:
+      name: grafana
+    sessionAffinity: None
+    type: ClusterIP
+
+################################## GRAFANA CONFIGURATION
+- apiVersion: v1
+  kind: ConfigMap
+  data:
+    grafana.ini: |2
+      ## For a full reference of the configuration options
+      ## check http://docs.grafana.org/installation/configuration/
+
+      #################################### Analytics ####################################
+      [analytics]
+
+      # Set to false to disable all checks to https://grafana.net
+      # for new vesions (grafana itself and plugins), check is used
+      # in some UI views to notify that grafana or plugin update exists
+      # This option does not cause any auto updates, nor send any information
+      # only a GET request to http://grafana.net to get latest versions
+      check_for_updates = true
+      #################################### Security ####################################
+      [security]
+      # default admin user, created on startup
+      admin_user = ${ADMIN_USER}
+      # The password of the default Grafana admin. Set once on first-run. It is useless when using SSO.
+      admin_password = ${ADMIN_PASSWORD}
+      #################################### Paths ####################################
+      [paths]
+      ## Path to where grafana can store temp files, sessions, and the sqlite3 db (if that is used)
+      ##
+      data = /var/lib/grafana
+      ##
+      ## Directory where grafana can store logs
+      ##
+      logs = /var/log/grafana
+      ##
+      ## Directory where grafana will automatically scan and look for plugins
+      ##
+      plugins = /var/lib/grafana/plugins
+
+      #################################### Auth Proxy ##########################
+      [auth.proxy]
+      enabled = true
+      header_name = X-Remote-User
+      header_property = username
+      auto_sign_up = true
+
+      #################################### Basic Auth ##########################
+      [auth.basic]
+      enabled = false
+
+      #################################### Ldap Auth ##########################
+      [auth.basic]
+      enabled = false
+
+      ########################################## Internal Grafana Metrics ##########################
+      # Url used to to import dashboards directly from Grafana.net
+      [grafana_net]
+      url = https://grafana.net
+    ldap.toml: |2
+      # To troubleshoot and get more log info enable ldap debug logging in
+      # grafana.ini
+      # [log]
+      # filters = ldap:debug
+      [[servers]]
+      # Ldap server host (specify multiple hosts space separated)
+      host = "cerndc.cern.ch"
+      # Default port is 389 or 636 if use_ssl = true
+      port = 636
+      # Set to true if ldap server supports TLS
+      use_ssl = true
+      # Set to true if connect ldap server with STARTTLS pattern (create
+      # connection in insecure, then upgrade to secure connection with TLS)
+      start_tls = false
+      # set to true if you want to skip ssl cert validation
+      ssl_skip_verify = false
+      # set to the path to your root CA certificate or leave unset to use
+      # system defaults
+      root_ca_cert = "/etc/ssl/certs/CERT_Root_Certification_Authority_2.pem"
+
+      # Search user bind dn
+      bind_dn = "cn=XXXXXX,ou=users,ou=organic units,DC=cern,dc=ch"
+      # Search user bind password
+      # If the password contains # or ; you have to wrap it with trippel
+      # quotes. Ex """#password;"""
+      bind_password = 'XXXXXXXXXXX'
+
+      # User search filter, for example "(cn=%s)" or "(sAMAccountName=%s)" or
+      # "(uid=%s)"
+      search_filter = "(cn=%s)"
+
+      # An array of base dns to search through
+      search_base_dns = ["DC=cern,DC=ch"]
+
+      # Specify names of the ldap attributes your ldap uses
+      [servers.attributes]
+      name = "givenName"
+      surname = "sn"
+      username = "cn"
+      member_of = "memberOf"
+      email =  "mail"
+
+      # Map ldap groups to grafana org roles. Substitute the value of
+      # <ADMIN-EGROUP>, <USER-EGROUP>, or add/remove at your conveninence
+      [[servers.group_mappings]]
+      group_dn = "CN=<ADMIN-EGROUP>,OU=e-groups,OU=Workgroups,DC=cern,DC=ch"
+      org_role = "Admin"
+      # The Grafana organization database id, optional, if left out the
+      # default org (id 1) will be used
+      org_id = 1
+
+      [[servers.group_mappings]]
+      group_dn = "CN=<USER-EGROUP>,OU=e-groups,OU=Workgroups,DC=cern,DC=ch"
+      org_role = "Viewer"
+      org_id = 2
+
+      #[[servers.group_mappings]]
+      # If you want to match all (or no ldap groups) then you can use wildcards
+      group_dn = "*"
+      org_role = "Viewer"
+  metadata:
+    creationTimestamp: null
+    name: grafana-config
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    creationTimestamp: null
+    name: grafana-data
+  spec:
+    accessModes:
+    - ReadWriteMany
+    - ReadWriteOnce
+    - ReadOnlyMany
+    resources:
+      requests:
+        storage: 5Gi # We set a size of 5Gi by default
+
+################################## GRAFANA DEPLOYMENT
+- apiVersion: v1
+  kind: DeploymentConfig
+  metadata:
+    name: grafana
+  spec:
+    replicas: 1
+    selector:
+      name: grafana
+    strategy:
+      resources: {}
+      rollingParams:
+        intervalSeconds: 1
+        maxSurge: 25%
+        maxUnavailable: 25%
+        timeoutSeconds: 600
+        updatePeriodSeconds: 1
+      type: Rolling
+    template:
+      metadata:
+        labels:
+          name: grafana
+      spec:
+        containers:
+        - image: grafana:stable
+          imagePullPolicy: Always
+          name: grafana
+          ports:
+          - containerPort: 3000
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            periodSeconds: 5
+            successThreshold: 1
+            tcpSocket:
+              port: 3000
+            timeoutSeconds: 1
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          volumeMounts:
+          - mountPath: /etc/grafana
+            name: grafana-config
+          - mountPath: /var/lib/grafana
+            name: grafana-data
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            name: grafana-config
+          name: grafana-config
+        - name: grafana-data
+          persistentVolumeClaim:
+            claimName: grafana-data
+    test: false
+    triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+        - grafana
+        from:
+          kind: ImageStreamTag
+          name: grafana:stable
+          namespace: openshift
+      type: ImageChange
+
+################################## PROMETHEUS CONFIGURATION
+- apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    name: prom-configuration
+  data: # at /etc/prometheus/
+    prometheus.yml: |2
+      global:
+        scrape_interval: ${SCRAPE_INTERVAL}
+        scrape_timeout: ${SCRAPE_TIMEOUT}
+      scrape_configs:
+      - job_name: Cloud Consumpion Data Exporters
+        metrics_path: /probe
+        static_configs:
+        - targets:
+          - gcpexporter:7979
+          - awsexporter:7979
+      remote_write:
+        - url: https://dbod-cbankeu.cern.ch:8081/api/v1/prom/write?db=${DB_NAME}
+          tls_config:
+            insecure_skip_verify: true
+          basic_auth:
+            username: ${DB_USERNAME}
+            password: ${DB_PASSWORD}
+
+################################## PROMETHEUS SERVICE
+- apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      template: "prometheus"
+    name: prometheus
+  spec:
+    ports:
+    - name: 9090-tcp
+      port: 9090
+      protocol: TCP
+      targetPort: 9090
+    selector:
+      name: prometheus
+    sessionAffinity: None
+    type: ClusterIP
+
+################################## PROMETHEUS DEPLOYMENT
+- apiVersion: v1
+  kind: DeploymentConfig
+  metadata:
+    labels:
+      app: prometheus
+    name: prometheus
+    namespace: cloudbank-monit
+  spec:
+    replicas: 1
+    selector:
+      app: prometheus
+      deploymentconfig: prometheus
+    template:
+      metadata:
+        labels:
+          app: prometheus
+          name: prometheus
+          deploymentconfig: prometheus
+      spec:
+        containers:
+          - image: prom/prometheus:latest
+            imagePullPolicy: Always
+            name: prometheus
+            ports:
+              - containerPort: 9090
+                protocol: TCP
+            resources: {}
+            terminationMessagePath: /dev/termination-log
+            volumeMounts:
+              - name: prometheus-1
+                mountPath: /prometheus
+              - name: prom-configuration
+                mountPath: "/etc/prometheus"
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+          - emptyDir: {}
+            name: prometheus-1
+          - configMap:
+              name: prom-configuration
+            name: prom-configuration
+    test: false
+
+################################## AWS EXPORTER SERVICE
+- apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      template: awsexporter #this label will applied to all objects created from this template
+    name: awsexporter
+  spec:
+    ports:
+    - name: 7979-tcp
+      port: 7979
+      protocol: TCP
+      targetPort: 7979
+    selector:
+      name: awsexporter
+    sessionAffinity: None
+    type: ClusterIP
+
+################################## AWS EXPORTER DEPLOYMENT
+- apiVersion: v1
+  kind: DeploymentConfig
+  metadata:
+    name: awsexporter
+  spec:
+    replicas: 1
+    selector:
+      name: awsexporter
+    template:
+      metadata:
+        labels:
+          name: awsexporter
+      spec:
+        containers:
+        - image: cernefp/cloudbank-monit-exporter:${EXPORTER_IMAGE}
+          command: ["/bin/sh","-c"]
+          args:
+            - cd /home/exporter/aws && python3 main.py # sleep infinity
+          imagePullPolicy: Always
+          name: awsexporter
+          env:
+          - name: "AWS_EXPORTER_ACC_KEY"
+            value: ${AWS_EXPORTER_ACC_KEY}
+          - name: "AWS_EXPORTER_SEC_KEY"
+            value: ${AWS_EXPORTER_SEC_KEY}
+          ports:
+          - containerPort: 7979
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            periodSeconds: 5
+            successThreshold: 1
+            tcpSocket:
+              port: 7979
+            timeoutSeconds: 1
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+    test: false
+
+################################## GCP EXPORTER SERVICE
+- apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      template: gcpexporter
+    name: gcpexporter
+  spec:
+    ports:
+    - name: 7979-tcp
+      port: 7979
+      protocol: TCP
+      targetPort: 7979
+    selector:
+      name: gcpexporter
+    sessionAffinity: None
+    type: ClusterIP
+
+################################## GCP EXPORTER DEPLOYMENT
+- apiVersion: v1
+  kind: DeploymentConfig
+  metadata:
+    name: gcpexporter
+  spec:
+    replicas: 1
+    selector:
+      name: gcpexporter
+    template:
+      metadata:
+        labels:
+          name: gcpexporter
+      spec:
+        containers:
+        - image: cernefp/cloudbank-monit-exporter:${EXPORTER_IMAGE}
+          command: ["/bin/bash","-c"]
+          args:
+            - echo $GCP_AUTH | jq . > /tmp/auth.json ;
+              cd /home/exporter/gcp && python3 main.py # sleep infinity
+          imagePullPolicy: Always
+          name: gcpexporter
+          env:
+          - name: "GCP_AUTH"
+            value: ${GCP_AUTH}
+          - name: "GOOGLE_APPLICATION_CREDENTIALS"
+            value: /tmp/auth.json
+          ports:
+          - containerPort: 7979
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            periodSeconds: 5
+            successThreshold: 1
+            tcpSocket:
+              port: 7979
+            timeoutSeconds: 1
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+    test: false
+
+################################## PARAMETERS DEFINITION
+parameters:
+  - name: "ADMIN_USER"
+    description: "CERN username of the admin of the Grafana instance. It can be only one."
+    required: true
+  - name: "AUTHORIZED_GROUPS"
+    description: "E-group(s) with Viewer access to the Grafana instance. It can be more than one if separated by spaces. "
+    value: 'it-dep-di-efp'
+    required: true
+  - name: "ADMIN_PASSWORD"
+    description: "Please leave blank: a random password will be generated. Admin password is useless when using SSO. "
+    generate: "expression"
+    from: "[a-zA-Z0-9]{12}"
+  - name: "DB_NAME"
+    value: "prometheus_data"
+  - name: "DB_USERNAME"
+    required: true
+  - name: "DB_PASSWORD"
+    required: true
+  - name: "SCRAPE_INTERVAL"
+    value: "30s"
+  - name: "SCRAPE_TIMEOUT"
+    value: "30s"
+  - name: "AWS_EXPORTER_ACC_KEY"
+    required: true
+  - name: "AWS_EXPORTER_SEC_KEY"
+    required: true
+  - name: "EXPORTER_IMAGE"
+    value: 'os4'
+  - name: "GCP_AUTH"
+    required: true

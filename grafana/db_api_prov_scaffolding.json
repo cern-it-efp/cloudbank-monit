@@ -1,0 +1,5 @@
+{
+"dashboard": "PUT HERE THE JSON EXPORTED FROM THE UI (with id: null)",
+"folderId": 0,
+"overwrite": true
+}
