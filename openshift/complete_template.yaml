@@ -560,7 +560,7 @@ objects:
         - image: cernefp/cloudbank-monit-exporter:${EXPORTER_IMAGE}
           command: ["/bin/sh","-c"]
           args:
-            - cd /home/exporter/aws && python3 main.py # sleep infinity
+            - git clone https://github.com/cern-it-efp/cloudbank-monit && cd cloudbank-monit/prometheus/exporters/aws && python3 main.py # sleep infinity
           imagePullPolicy: Always
           name: awsexporter
           env:
@@ -623,7 +623,7 @@ objects:
           command: ["/bin/bash","-c"]
           args:
             - echo $GCP_AUTH | jq . > /tmp/auth.json ;
-              cd /home/exporter/gcp && python3 main.py # sleep infinity
+              git clone https://github.com/cern-it-efp/cloudbank-monit && cd cloudbank-monit/prometheus/exporters/gcp && python3 main.py # sleep infinity
           imagePullPolicy: Always
           name: gcpexporter
           env:
@@ -649,6 +649,67 @@ objects:
         terminationGracePeriodSeconds: 30
     test: false
 
+################################## Yandex EXPORTER SERVICE
+- apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      template: yandexexporter #this label will applied to all objects created from this template
+    name: yandexexporter
+  spec:
+    ports:
+    - name: 7979-tcp
+      port: 7979
+      protocol: TCP
+      targetPort: 7979
+    selector:
+      name: yandexexporter
+    sessionAffinity: None
+    type: ClusterIP
+
+################################## Yandex EXPORTER DEPLOYMENT
+- apiVersion: v1
+  kind: DeploymentConfig
+  metadata:
+    name: yandexexporter
+  spec:
+    replicas: 1
+    selector:
+      name: yandexexporter
+    template:
+      metadata:
+        labels:
+          name: yandexexporter
+      spec:
+        containers:
+        - image: cernefp/cloudbank-monit-exporter:${EXPORTER_IMAGE}
+          command: ["/bin/sh","-c"]
+          args:
+            - git clone https://github.com/cern-it-efp/cloudbank-monit && cd cloudbank-monit/prometheus/exporters/yandex && python3 main.py # sleep infinity
+          imagePullPolicy: Always
+          name: yandexexporter
+          env:
+          - name: "AWS_EXPORTER_ACC_KEY"
+            value: ${AWS_EXPORTER_ACC_KEY}
+          - name: "AWS_EXPORTER_SEC_KEY"
+            value: ${AWS_EXPORTER_SEC_KEY}
+          ports:
+          - containerPort: 7979
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            periodSeconds: 5
+            successThreshold: 1
+            tcpSocket:
+              port: 7979
+            timeoutSeconds: 1
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+    test: false
 ################################## PARAMETERS DEFINITION
 parameters:
   - name: "ADMIN_USER"
