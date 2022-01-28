@@ -42,7 +42,7 @@ client_s3.download_file('cern-billing',
 
 def get_folders():
     cloudID = "b1gv4hq5u08rjf91v2an"
-    auth_path = "/home/apostolos/Downloads/key.json"
+    auth_path = "/tmp/key.json"
 
     folder_service = yandexcloud.SDK(service_account_key=json.load(open(auth_path,"r"))).client(FolderServiceStub)
 
