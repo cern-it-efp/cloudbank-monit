@@ -2,13 +2,13 @@
 
 Platform for cloud services usage and consumption monitoring in the scope of the [CloudBankEU project](https://ngiatlantic.eu/funded-experiments/cloudbank-eu-ngi).
 
-This is an Open Source project licensed under X, developed in collaboration with [UCSD](https://ucsd.edu/).
+This is an Open Source project licensed under GNU Affero General Public License, developed in collaboration with [UCSD](https://ucsd.edu/).
 
 No personal data is stored in any circumstance. Only Project and Billing IDs, cost expenditure and usage per cloud service.
 
 ## Architecture
 
-This application runs in the CERN Openshift and is conformed by the following core components:
+This application runs in CERN Openshift and is conformed by the following core components:
 
 - CERN SSO: authentication for CERN users.
 - Grafana: dashboards displaying the data.
