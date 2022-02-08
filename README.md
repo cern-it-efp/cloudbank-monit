@@ -22,3 +22,11 @@ The architecture can be seen here: https://docs.google.com/drawings/d/1ISj875a-N
 ## Deployment
 
 Refer to the [Openshift](openshift) folder.
+
+## License
+
+Copyright (C) CERN.
+
+Licensed under GNU Affero General Public License.
+
+
