@@ -8,7 +8,7 @@ No personal data is stored in any circumstance. Only Project and Billing IDs, co
 
 ## Architecture
 
-This application runs in CERN Openshift and is conformed by the following core components:
+This application runs in the CERN Openshift and is conformed by the following core components:
 
 - CERN SSO: authentication for CERN users.
 - Grafana: dashboards displaying the data.
