@@ -75,7 +75,7 @@ class BigQueryCollector(object):
 
                 counterMetric.add_metric([
                             month,
-                            str(key2)], 
+                            str(key2)], # this is project identifier
                             value2)
 
             yield counterMetric
