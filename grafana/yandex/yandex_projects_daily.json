@@ -1,6 +1,5 @@
 {
-"dashboard":
-{
+"dashboard": {
   "annotations": {
     "list": [
       {
@@ -469,4 +468,5 @@
 },
 "folderId": 0,
 "overwrite": true
+
 }
