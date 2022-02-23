@@ -15,30 +15,11 @@ import yandexcloud
 from yandex.cloud.resourcemanager.v1.folder_service_pb2 import ListFoldersRequest
 from yandex.cloud.resourcemanager.v1.folder_service_pb2_grpc import FolderServiceStub
 
-today = datetime.date.today()
-
-yesterday = today - datetime.timedelta(days=1)
-
-yesterday = yesterday.strftime('%Y%m%d')
-
-file = (yesterday + ".csv")
 
 #local_path = "C:/Users/atheodor/AppData/Local/Temp"
 local_path = "/tmp"
 
-client_s3 = boto3.client(
-        "s3",
-	aws_access_key_id=config.ACC_KEY,
-        aws_secret_access_key=config.SEC_KEY,
 
-        endpoint_url = "https://storage.yandexcloud.net"
-        #region_name="us-east-2" # compulsory
-    )
-
-client_s3.download_file('cern-billing',
-                        file,
-			local_path + '/file'
-                        )
 
 def get_folders():
     cloudID = "b1gv4hq5u08rjf91v2an"
@@ -56,6 +37,28 @@ def get_folders():
     return folderlist
 
 def get_yandex():
+
+    today = datetime.date.today()
+
+    yesterday = today - datetime.timedelta(days=1)
+
+    yesterday = yesterday.strftime('%Y%m%d')
+
+    file = (yesterday + ".csv")
+
+    client_s3 = boto3.client(
+            "s3",
+    	aws_access_key_id=config.ACC_KEY,
+            aws_secret_access_key=config.SEC_KEY,
+
+            endpoint_url = "https://storage.yandexcloud.net"
+            #region_name="us-east-2" # compulsory
+        )
+
+    client_s3.download_file('cern-billing',
+                            file,
+                            local_path + '/file'
+                            )
 
     df = pd.read_csv(local_path + '/file', usecols = ['billing_account_id','folder_name','cost'])
 
@@ -76,6 +79,4 @@ def get_yandex():
 
 
     return YDX_data
-
 print(get_yandex())
-print(file)

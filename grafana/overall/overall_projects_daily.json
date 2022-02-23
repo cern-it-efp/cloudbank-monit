@@ -16,7 +16,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 4,
+  "id": 2,
   "links": [],
   "panels": [
     {
@@ -44,7 +44,7 @@
         "y": 0
       },
       "hiddenSeries": false,
-      "id": 2,
+      "id": 3,
       "legend": {
         "avg": false,
         "current": false,
@@ -477,7 +477,7 @@
         "x": 0,
         "y": 9
       },
-      "id": 3,
+      "id": 5,
       "options": {
         "reduceOptions": {
           "calcs": [
@@ -639,7 +639,7 @@
         "y": 9
       },
       "hiddenSeries": false,
-      "id": 5,
+      "id": 6,
       "legend": {
         "avg": false,
         "current": false,

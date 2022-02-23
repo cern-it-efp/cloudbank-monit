@@ -14,15 +14,6 @@ import datetime as dt
 local_path = "C:/Users/atheodor/AppData/Local/Temp"
 local_path = "/tmp"
 
-dateNow = dt.datetime.now()
-year = dateNow.strftime("%Y")
-month = dateNow.strftime("%m")
-next_month = int(month)+1
-
-currentMonth_json = dateNow.strftime("%m-%Y")
-currentMonth = "%s%s01-%s0%s01" % (year,month,year,next_month)
-
-current_path = ("/sb-cern-aws/" + currentMonth + "/sb-cern-aws-Manifest.json")
 
 def getGroups():
     """ Returns a dictionary containing properties, groupdID:name. """
@@ -66,6 +57,18 @@ def getGroups():
 
 
 def getAWS():
+
+    dateNow = dt.datetime.now()
+    year = dateNow.strftime("%Y")
+    month = dateNow.strftime("%m")
+    next_month = int(month)+1
+
+    currentMonth_json = dateNow.strftime("%m-%Y")
+    currentMonth = "%s%s01-%s0%s01" % (year,month,year,next_month)
+
+    current_path = ("/sb-cern-aws/" + currentMonth + "/sb-cern-aws-Manifest.json")
+
+
     ###### Create a boto3 client that allows you to programmatically use the S3 service:
     print("Source code updated")
     client_s3 = boto3.client(
