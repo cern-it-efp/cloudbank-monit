@@ -79,4 +79,3 @@ def get_yandex():
 
 
     return YDX_data
-print(get_yandex())
