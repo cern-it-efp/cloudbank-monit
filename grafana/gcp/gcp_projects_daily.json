@@ -1,1225 +1,1562 @@
 {
-  "dashboard": {
-    "annotations": {
-      "list": [{
-        "builtIn": 1,
-        "datasource": "-- Grafana --",
-        "enable": true,
-        "hide": true,
-        "iconColor": "rgba(0, 211, 255, 1)",
-        "name": "Annotations & Alerts",
-        "type": "dashboard"
-      }]
-    },
-    "editable": true,
-    "gnetId": null,
-    "graphTooltip": 0,
-    "links": [],
-    "panels": [{
-        "aliasColors": {},
-        "bars": false,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": "InfluxDB-remote",
-        "description": "",
-        "fieldConfig": {
-          "defaults": {
-            "custom": {}
-          },
-          "overrides": []
-        },
-        "fill": 1,
-        "fillGradient": 0,
-        "gridPos": {
-          "h": 9,
-          "w": 24,
-          "x": 0,
-          "y": 0
-        },
-        "hiddenSeries": false,
-        "id": 2,
-        "legend": {
-          "avg": false,
-          "current": false,
-          "max": false,
-          "min": false,
-          "show": true,
-          "total": false,
-          "values": false
-        },
-        "lines": true,
-        "linewidth": 1,
-        "nullPointMode": "null",
-        "options": {
-          "alertThreshold": true
-        },
-        "percentage": false,
-        "pluginVersion": "7.3.7",
-        "pointradius": 2,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [],
-        "spaceLength": 10,
-        "stack": false,
-        "steppedLine": false,
-        "targets": [{
-            "alias": "$tag_projectid",
-            "groupBy": [{
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }],
-            "measurement": "amountSpent",
-            "orderByTime": "ASC",
-            "policy": "autogen",
-            "queryType": "randomWalk",
-            "refId": "A",
-            "resultFormat": "time_series",
-            "select": [
-              [{
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              }]
-            ],
-            "tags": [{
-                "key": "projectid",
-                "operator": "=",
-                "value": "beop-teabt-cern"
-              },
-              {
-                "condition": "AND",
-                "key": "platform",
-                "operator": "=",
-                "value": "GCP"
-              }
-            ]
-          },
-          {
-            "alias": "$tag_projectid",
-            "groupBy": [{
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }],
-            "measurement": "amountSpent",
-            "orderByTime": "ASC",
-            "policy": "autogen",
-            "queryType": "randomWalk",
-            "refId": "B",
-            "resultFormat": "time_series",
-            "select": [
-              [{
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              }]
-            ],
-            "tags": [{
-                "key": "projectid",
-                "operator": "=",
-                "value": "it-atlas-cern"
-              },
-              {
-                "condition": "AND",
-                "key": "platform",
-                "operator": "=",
-                "value": "GCP"
-              }
-            ]
-          },
-          {
-            "alias": "$tag_projectid",
-            "groupBy": [{
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }],
-            "measurement": "amountSpent",
-            "orderByTime": "ASC",
-            "policy": "autogen",
-            "queryType": "randomWalk",
-            "refId": "C",
-            "resultFormat": "time_series",
-            "select": [
-              [{
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              }]
-            ],
-            "tags": [{
-                "key": "projectid",
-                "operator": "=",
-                "value": "alice-cern"
-              },
-              {
-                "condition": "AND",
-                "key": "platform",
-                "operator": "=",
-                "value": "GCP"
-              }
-            ]
-          },
-          {
-            "alias": "$tag_projectid",
-            "groupBy": [{
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }],
-            "measurement": "amountSpent",
-            "orderByTime": "ASC",
-            "policy": "autogen",
-            "queryType": "randomWalk",
-            "refId": "D",
-            "resultFormat": "time_series",
-            "select": [
-              [{
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              }]
-            ],
-            "tags": [{
-                "key": "projectid",
-                "operator": "=",
-                "value": "escapedatalake"
-              },
-              {
-                "condition": "AND",
-                "key": "platform",
-                "operator": "=",
-                "value": "GCP"
-              }
-            ]
-          },
-          {
-            "alias": "$tag_projectid",
-            "groupBy": [{
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }],
-            "measurement": "amountSpent",
-            "orderByTime": "ASC",
-            "policy": "autogen",
-            "queryType": "randomWalk",
-            "refId": "E",
-            "resultFormat": "time_series",
-            "select": [
-              [{
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              }]
-            ],
-            "tags": [{
-                "key": "projectid",
-                "operator": "=",
-                "value": "generaltest-cern"
-              },
-              {
-                "condition": "AND",
-                "key": "platform",
-                "operator": "=",
-                "value": "GCP"
-              }
-            ]
-          },
-          {
-            "alias": "$tag_projectid",
-            "groupBy": [{
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }],
-            "measurement": "amountSpent",
-            "orderByTime": "ASC",
-            "policy": "autogen",
-            "queryType": "randomWalk",
-            "refId": "F",
-            "resultFormat": "time_series",
-            "select": [
-              [{
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              }]
-            ],
-            "tags": [{
-                "key": "projectid",
-                "operator": "=",
-                "value": "it-openlab-cern"
-              },
-              {
-                "condition": "AND",
-                "key": "platform",
-                "operator": "=",
-                "value": "GCP"
-              }
-            ]
-          },
-          {
-            "alias": "$tag_projectid",
-            "groupBy": [{
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }],
-            "measurement": "amountSpent",
-            "orderByTime": "ASC",
-            "policy": "autogen",
-            "queryType": "randomWalk",
-            "refId": "G",
-            "resultFormat": "time_series",
-            "select": [
-              [{
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              }]
-            ],
-            "tags": [{
-                "key": "projectid",
-                "operator": "=",
-                "value": "cms-opendata"
-              },
-              {
-                "condition": "AND",
-                "key": "platform",
-                "operator": "=",
-                "value": "GCP"
-              }
-            ]
-          },
-          {
-            "alias": "$tag_projectid",
-            "groupBy": [{
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }],
-            "measurement": "amountSpent",
-            "orderByTime": "ASC",
-            "policy": "autogen",
-            "queryType": "randomWalk",
-            "refId": "H",
-            "resultFormat": "time_series",
-            "select": [
-              [{
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              }]
-            ],
-            "tags": [{
-                "key": "projectid",
-                "operator": "=",
-                "value": "it-db-sas-cern"
-              },
-              {
-                "condition": "AND",
-                "key": "platform",
-                "operator": "=",
-                "value": "GCP"
-              }
-            ]
-          }
-        ],
-        "thresholds": [],
-        "timeFrom": null,
-        "timeRegions": [],
-        "timeShift": null,
-        "title": "GCP Daily Consumption",
-        "tooltip": {
-          "shared": true,
-          "sort": 0,
-          "value_type": "individual"
-        },
-        "type": "graph",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [{
-            "decimals": null,
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      },
+  "dashboard":
+  {
+"annotations": {
+"list": [
+{
+  "builtIn": 1,
+  "datasource": "-- Grafana --",
+  "enable": true,
+  "hide": true,
+  "iconColor": "rgba(0, 211, 255, 1)",
+  "name": "Annotations & Alerts",
+  "type": "dashboard"
+}
+]
+},
+"editable": true,
+"gnetId": null,
+"graphTooltip": 0,
+"id": 1,
+"links": [],
+"panels": [
+{
+"aliasColors": {},
+"bars": false,
+"dashLength": 10,
+"dashes": false,
+"datasource": "InfluxDB-remote",
+"description": "",
+"fieldConfig": {
+  "defaults": {},
+  "overrides": []
+},
+"fill": 1,
+"fillGradient": 0,
+"gridPos": {
+  "h": 8,
+  "w": 13,
+  "x": 0,
+  "y": 0
+},
+"hiddenSeries": false,
+"id": 2,
+"legend": {
+  "avg": false,
+  "current": false,
+  "max": false,
+  "min": false,
+  "show": true,
+  "total": false,
+  "values": false
+},
+"lines": true,
+"linewidth": 1,
+"nullPointMode": "null",
+"options": {
+  "alertThreshold": true
+},
+"percentage": false,
+"pluginVersion": "7.5.5",
+"pointradius": 2,
+"points": false,
+"renderer": "flot",
+"seriesOverrides": [],
+"spaceLength": 10,
+"stack": false,
+"steppedLine": false,
+"targets": [
+  {
+    "alias": "$tag_projectid",
+    "groupBy": [
       {
-        "aliasColors": {},
-        "bars": false,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": "InfluxDB-remote",
-        "description": "",
-        "fieldConfig": {
-          "defaults": {
-            "custom": {}
-          },
-          "overrides": []
-        },
-        "fill": 1,
-        "fillGradient": 0,
-        "gridPos": {
-          "h": 9,
-          "w": 24,
-          "x": 0,
-          "y": 9
-        },
-        "hiddenSeries": false,
-        "id": 3,
-        "legend": {
-          "avg": false,
-          "current": false,
-          "max": false,
-          "min": false,
-          "show": true,
-          "total": false,
-          "values": false
-        },
-        "lines": true,
-        "linewidth": 1,
-        "nullPointMode": "null",
-        "options": {
-          "alertThreshold": true
-        },
-        "percentage": false,
-        "pluginVersion": "7.3.7",
-        "pointradius": 2,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [],
-        "spaceLength": 10,
-        "stack": false,
-        "steppedLine": false,
-        "targets": [{
-            "alias": "$tag_projectid",
-            "groupBy": [{
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }],
-            "measurement": "amountSpent",
-            "orderByTime": "ASC",
-            "policy": "autogen",
-            "queryType": "randomWalk",
-            "refId": "A",
-            "resultFormat": "time_series",
-            "select": [
-              [{
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "cumulative_sum"
-                }
-              ]
-            ],
-            "tags": [{
-                "key": "projectid",
-                "operator": "=",
-                "value": "beop-teabt-cern"
-              },
-              {
-                "condition": "AND",
-                "key": "platform",
-                "operator": "=",
-                "value": "GCP"
-              }
-            ]
-          },
-          {
-            "alias": "$tag_projectid",
-            "groupBy": [{
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }],
-            "measurement": "amountSpent",
-            "orderByTime": "ASC",
-            "policy": "autogen",
-            "queryType": "randomWalk",
-            "refId": "B",
-            "resultFormat": "time_series",
-            "select": [
-              [{
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "cumulative_sum"
-                }
-              ]
-            ],
-            "tags": [{
-                "key": "projectid",
-                "operator": "=",
-                "value": "it-atlas-cern"
-              },
-              {
-                "condition": "AND",
-                "key": "platform",
-                "operator": "=",
-                "value": "GCP"
-              }
-            ]
-          },
-          {
-            "alias": "$tag_projectid",
-            "groupBy": [{
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }],
-            "measurement": "amountSpent",
-            "orderByTime": "ASC",
-            "policy": "autogen",
-            "queryType": "randomWalk",
-            "refId": "C",
-            "resultFormat": "time_series",
-            "select": [
-              [{
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "cumulative_sum"
-                }
-              ]
-            ],
-            "tags": [{
-                "key": "projectid",
-                "operator": "=",
-                "value": "alice-cern"
-              },
-              {
-                "condition": "AND",
-                "key": "platform",
-                "operator": "=",
-                "value": "GCP"
-              }
-            ]
-          },
-          {
-            "alias": "$tag_projectid",
-            "groupBy": [{
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }],
-            "measurement": "amountSpent",
-            "orderByTime": "ASC",
-            "policy": "autogen",
-            "queryType": "randomWalk",
-            "refId": "D",
-            "resultFormat": "time_series",
-            "select": [
-              [{
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "cumulative_sum"
-                }
-              ]
-            ],
-            "tags": [{
-                "key": "projectid",
-                "operator": "=",
-                "value": "escapedatalake"
-              },
-              {
-                "condition": "AND",
-                "key": "platform",
-                "operator": "=",
-                "value": "GCP"
-              }
-            ]
-          },
-          {
-            "alias": "$tag_projectid",
-            "groupBy": [{
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }],
-            "measurement": "amountSpent",
-            "orderByTime": "ASC",
-            "policy": "autogen",
-            "queryType": "randomWalk",
-            "refId": "E",
-            "resultFormat": "time_series",
-            "select": [
-              [{
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "cumulative_sum"
-                }
-              ]
-            ],
-            "tags": [{
-                "key": "projectid",
-                "operator": "=",
-                "value": "generaltest-cern"
-              },
-              {
-                "condition": "AND",
-                "key": "platform",
-                "operator": "=",
-                "value": "GCP"
-              }
-            ]
-          },
-          {
-            "alias": "$tag_projectid",
-            "groupBy": [{
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }],
-            "measurement": "amountSpent",
-            "orderByTime": "ASC",
-            "policy": "autogen",
-            "queryType": "randomWalk",
-            "refId": "F",
-            "resultFormat": "time_series",
-            "select": [
-              [{
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "cumulative_sum"
-                }
-              ]
-            ],
-            "tags": [{
-                "key": "projectid",
-                "operator": "=",
-                "value": "it-openlab-cern"
-              },
-              {
-                "condition": "AND",
-                "key": "platform",
-                "operator": "=",
-                "value": "GCP"
-              }
-            ]
-          },
-          {
-            "alias": "$tag_projectid",
-            "groupBy": [{
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }],
-            "measurement": "amountSpent",
-            "orderByTime": "ASC",
-            "policy": "autogen",
-            "queryType": "randomWalk",
-            "refId": "G",
-            "resultFormat": "time_series",
-            "select": [
-              [{
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "cumulative_sum"
-                }
-              ]
-            ],
-            "tags": [{
-                "key": "projectid",
-                "operator": "=",
-                "value": "cms-opendata"
-              },
-              {
-                "condition": "AND",
-                "key": "platform",
-                "operator": "=",
-                "value": "GCP"
-              }
-            ]
-          },
-          {
-            "alias": "$tag_projectid",
-            "groupBy": [{
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }],
-            "measurement": "amountSpent",
-            "orderByTime": "ASC",
-            "policy": "autogen",
-            "queryType": "randomWalk",
-            "refId": "H",
-            "resultFormat": "time_series",
-            "select": [
-              [{
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "cumulative_sum"
-                }
-              ]
-            ],
-            "tags": [{
-                "key": "projectid",
-                "operator": "=",
-                "value": "it-db-sas-cern"
-              },
-              {
-                "condition": "AND",
-                "key": "platform",
-                "operator": "=",
-                "value": "GCP"
-              }
-            ]
-          }
+        "params": [
+          "projectid"
         ],
-        "thresholds": [],
-        "timeFrom": null,
-        "timeRegions": [],
-        "timeShift": null,
-        "title": "GCP Daily Consumption (aggregated)",
-        "tooltip": {
-          "shared": true,
-          "sort": 0,
-          "value_type": "individual"
-        },
-        "type": "graph",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [{
-            "decimals": null,
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      },
-      {
-        "aliasColors": {},
-        "bars": false,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": "InfluxDB-remote",
-        "description": "",
-        "fieldConfig": {
-          "defaults": {
-            "custom": {}
-          },
-          "overrides": []
-        },
-        "fill": 1,
-        "fillGradient": 0,
-        "gridPos": {
-          "h": 9,
-          "w": 24,
-          "x": 0,
-          "y": 18
-        },
-        "hiddenSeries": false,
-        "id": 4,
-        "legend": {
-          "avg": false,
-          "current": false,
-          "max": false,
-          "min": false,
-          "show": true,
-          "total": false,
-          "values": false
-        },
-        "lines": true,
-        "linewidth": 1,
-        "nullPointMode": "null",
-        "options": {
-          "alertThreshold": true
-        },
-        "percentage": false,
-        "pluginVersion": "7.3.7",
-        "pointradius": 2,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [],
-        "spaceLength": 10,
-        "stack": true,
-        "steppedLine": false,
-        "targets": [{
-            "alias": "$tag_projectid",
-            "groupBy": [{
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }],
-            "measurement": "amountSpent",
-            "orderByTime": "ASC",
-            "policy": "autogen",
-            "queryType": "randomWalk",
-            "refId": "A",
-            "resultFormat": "time_series",
-            "select": [
-              [{
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "cumulative_sum"
-                }
-              ]
-            ],
-            "tags": [{
-                "key": "projectid",
-                "operator": "=",
-                "value": "beop-teabt-cern"
-              },
-              {
-                "condition": "AND",
-                "key": "platform",
-                "operator": "=",
-                "value": "GCP"
-              }
-            ]
-          },
-          {
-            "alias": "$tag_projectid",
-            "groupBy": [{
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }],
-            "measurement": "amountSpent",
-            "orderByTime": "ASC",
-            "policy": "autogen",
-            "queryType": "randomWalk",
-            "refId": "B",
-            "resultFormat": "time_series",
-            "select": [
-              [{
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "cumulative_sum"
-                }
-              ]
-            ],
-            "tags": [{
-                "key": "projectid",
-                "operator": "=",
-                "value": "it-atlas-cern"
-              },
-              {
-                "condition": "AND",
-                "key": "platform",
-                "operator": "=",
-                "value": "GCP"
-              }
-            ]
-          },
-          {
-            "alias": "$tag_projectid",
-            "groupBy": [{
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }],
-            "measurement": "amountSpent",
-            "orderByTime": "ASC",
-            "policy": "autogen",
-            "queryType": "randomWalk",
-            "refId": "C",
-            "resultFormat": "time_series",
-            "select": [
-              [{
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "cumulative_sum"
-                }
-              ]
-            ],
-            "tags": [{
-                "key": "projectid",
-                "operator": "=",
-                "value": "alice-cern"
-              },
-              {
-                "condition": "AND",
-                "key": "platform",
-                "operator": "=",
-                "value": "GCP"
-              }
-            ]
-          },
-          {
-            "alias": "$tag_projectid",
-            "groupBy": [{
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }],
-            "measurement": "amountSpent",
-            "orderByTime": "ASC",
-            "policy": "autogen",
-            "queryType": "randomWalk",
-            "refId": "D",
-            "resultFormat": "time_series",
-            "select": [
-              [{
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "cumulative_sum"
-                }
-              ]
-            ],
-            "tags": [{
-                "key": "projectid",
-                "operator": "=",
-                "value": "escapedatalake"
-              },
-              {
-                "condition": "AND",
-                "key": "platform",
-                "operator": "=",
-                "value": "GCP"
-              }
-            ]
-          },
-          {
-            "alias": "$tag_projectid",
-            "groupBy": [{
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }],
-            "measurement": "amountSpent",
-            "orderByTime": "ASC",
-            "policy": "autogen",
-            "queryType": "randomWalk",
-            "refId": "E",
-            "resultFormat": "time_series",
-            "select": [
-              [{
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "cumulative_sum"
-                }
-              ]
-            ],
-            "tags": [{
-                "key": "projectid",
-                "operator": "=",
-                "value": "generaltest-cern"
-              },
-              {
-                "condition": "AND",
-                "key": "platform",
-                "operator": "=",
-                "value": "GCP"
-              }
-            ]
-          },
-          {
-            "alias": "$tag_projectid",
-            "groupBy": [{
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }],
-            "measurement": "amountSpent",
-            "orderByTime": "ASC",
-            "policy": "autogen",
-            "queryType": "randomWalk",
-            "refId": "F",
-            "resultFormat": "time_series",
-            "select": [
-              [{
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "cumulative_sum"
-                }
-              ]
-            ],
-            "tags": [{
-                "key": "projectid",
-                "operator": "=",
-                "value": "it-openlab-cern"
-              },
-              {
-                "condition": "AND",
-                "key": "platform",
-                "operator": "=",
-                "value": "GCP"
-              }
-            ]
-          },
-          {
-            "alias": "$tag_projectid",
-            "groupBy": [{
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }],
-            "measurement": "amountSpent",
-            "orderByTime": "ASC",
-            "policy": "autogen",
-            "queryType": "randomWalk",
-            "refId": "G",
-            "resultFormat": "time_series",
-            "select": [
-              [{
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "cumulative_sum"
-                }
-              ]
-            ],
-            "tags": [{
-                "key": "projectid",
-                "operator": "=",
-                "value": "cms-opendata"
-              },
-              {
-                "condition": "AND",
-                "key": "platform",
-                "operator": "=",
-                "value": "GCP"
-              }
-            ]
-          },
-          {
-            "alias": "$tag_projectid",
-            "groupBy": [{
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }],
-            "measurement": "amountSpent",
-            "orderByTime": "ASC",
-            "policy": "autogen",
-            "queryType": "randomWalk",
-            "refId": "H",
-            "resultFormat": "time_series",
-            "select": [
-              [{
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "cumulative_sum"
-                }
-              ]
-            ],
-            "tags": [{
-                "key": "projectid",
-                "operator": "=",
-                "value": "it-db-sas-cern"
-              },
-              {
-                "condition": "AND",
-                "key": "platform",
-                "operator": "=",
-                "value": "GCP"
-              }
-            ]
-          }
-        ],
-        "thresholds": [],
-        "timeFrom": null,
-        "timeRegions": [],
-        "timeShift": null,
-        "title": "GCP Daily Consumption (aggregated and stacked)",
-        "tooltip": {
-          "shared": true,
-          "sort": 0,
-          "value_type": "individual"
-        },
-        "type": "graph",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [{
-            "decimals": null,
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
+        "type": "tag"
       }
     ],
-    "refresh": false,
-    "schemaVersion": 26,
-    "style": "dark",
-    "tags": [],
-    "templating": {
-      "list": []
-    },
-    "time": {
-      "from": "now-6M",
-      "to": "now"
-    },
-    "timepicker": {},
-    "timezone": "",
-    "title": "Google Cloud Platform",
-    "uid": "7CirYdR7k",
-    "version": 3
+    "measurement": "amountSpent",
+    "orderByTime": "ASC",
+    "policy": "autogen",
+    "queryType": "randomWalk",
+    "refId": "A",
+    "resultFormat": "time_series",
+    "select": [
+      [
+        {
+          "params": [
+            "value"
+          ],
+          "type": "field"
+        }
+      ]
+    ],
+    "tags": [
+      {
+        "key": "projectid",
+        "operator": "=",
+        "value": "beop-teabt-cern"
+      },
+      {
+        "condition": "AND",
+        "key": "platform",
+        "operator": "=",
+        "value": "GCP"
+      }
+    ]
   },
+  {
+    "alias": "$tag_projectid",
+    "groupBy": [
+      {
+        "params": [
+          "projectid"
+        ],
+        "type": "tag"
+      }
+    ],
+    "measurement": "amountSpent",
+    "orderByTime": "ASC",
+    "policy": "autogen",
+    "queryType": "randomWalk",
+    "refId": "B",
+    "resultFormat": "time_series",
+    "select": [
+      [
+        {
+          "params": [
+            "value"
+          ],
+          "type": "field"
+        }
+      ]
+    ],
+    "tags": [
+      {
+        "key": "projectid",
+        "operator": "=",
+        "value": "it-atlas-cern"
+      },
+      {
+        "condition": "AND",
+        "key": "platform",
+        "operator": "=",
+        "value": "GCP"
+      }
+    ]
+  },
+  {
+    "alias": "$tag_projectid",
+    "groupBy": [
+      {
+        "params": [
+          "projectid"
+        ],
+        "type": "tag"
+      }
+    ],
+    "measurement": "amountSpent",
+    "orderByTime": "ASC",
+    "policy": "autogen",
+    "queryType": "randomWalk",
+    "refId": "C",
+    "resultFormat": "time_series",
+    "select": [
+      [
+        {
+          "params": [
+            "value"
+          ],
+          "type": "field"
+        }
+      ]
+    ],
+    "tags": [
+      {
+        "key": "projectid",
+        "operator": "=",
+        "value": "alice-cern"
+      },
+      {
+        "condition": "AND",
+        "key": "platform",
+        "operator": "=",
+        "value": "GCP"
+      }
+    ]
+  },
+  {
+    "alias": "$tag_projectid",
+    "groupBy": [
+      {
+        "params": [
+          "projectid"
+        ],
+        "type": "tag"
+      }
+    ],
+    "measurement": "amountSpent",
+    "orderByTime": "ASC",
+    "policy": "autogen",
+    "queryType": "randomWalk",
+    "refId": "D",
+    "resultFormat": "time_series",
+    "select": [
+      [
+        {
+          "params": [
+            "value"
+          ],
+          "type": "field"
+        }
+      ]
+    ],
+    "tags": [
+      {
+        "key": "projectid",
+        "operator": "=",
+        "value": "escapedatalake"
+      },
+      {
+        "condition": "AND",
+        "key": "platform",
+        "operator": "=",
+        "value": "GCP"
+      }
+    ]
+  },
+  {
+    "alias": "$tag_projectid",
+    "groupBy": [
+      {
+        "params": [
+          "projectid"
+        ],
+        "type": "tag"
+      }
+    ],
+    "measurement": "amountSpent",
+    "orderByTime": "ASC",
+    "policy": "autogen",
+    "queryType": "randomWalk",
+    "refId": "E",
+    "resultFormat": "time_series",
+    "select": [
+      [
+        {
+          "params": [
+            "value"
+          ],
+          "type": "field"
+        }
+      ]
+    ],
+    "tags": [
+      {
+        "key": "projectid",
+        "operator": "=",
+        "value": "generaltest-cern"
+      },
+      {
+        "condition": "AND",
+        "key": "platform",
+        "operator": "=",
+        "value": "GCP"
+      }
+    ]
+  },
+  {
+    "alias": "$tag_projectid",
+    "groupBy": [
+      {
+        "params": [
+          "projectid"
+        ],
+        "type": "tag"
+      }
+    ],
+    "measurement": "amountSpent",
+    "orderByTime": "ASC",
+    "policy": "autogen",
+    "queryType": "randomWalk",
+    "refId": "F",
+    "resultFormat": "time_series",
+    "select": [
+      [
+        {
+          "params": [
+            "value"
+          ],
+          "type": "field"
+        }
+      ]
+    ],
+    "tags": [
+      {
+        "key": "projectid",
+        "operator": "=",
+        "value": "it-openlab-cern"
+      },
+      {
+        "condition": "AND",
+        "key": "platform",
+        "operator": "=",
+        "value": "GCP"
+      }
+    ]
+  },
+  {
+    "alias": "$tag_projectid",
+    "groupBy": [
+      {
+        "params": [
+          "projectid"
+        ],
+        "type": "tag"
+      }
+    ],
+    "measurement": "amountSpent",
+    "orderByTime": "ASC",
+    "policy": "autogen",
+    "queryType": "randomWalk",
+    "refId": "G",
+    "resultFormat": "time_series",
+    "select": [
+      [
+        {
+          "params": [
+            "value"
+          ],
+          "type": "field"
+        }
+      ]
+    ],
+    "tags": [
+      {
+        "key": "projectid",
+        "operator": "=",
+        "value": "cms-opendata"
+      },
+      {
+        "condition": "AND",
+        "key": "platform",
+        "operator": "=",
+        "value": "GCP"
+      }
+    ]
+  },
+  {
+    "alias": "$tag_projectid",
+    "groupBy": [
+      {
+        "params": [
+          "projectid"
+        ],
+        "type": "tag"
+      }
+    ],
+    "measurement": "amountSpent",
+    "orderByTime": "ASC",
+    "policy": "autogen",
+    "queryType": "randomWalk",
+    "refId": "H",
+    "resultFormat": "time_series",
+    "select": [
+      [
+        {
+          "params": [
+            "value"
+          ],
+          "type": "field"
+        }
+      ]
+    ],
+    "tags": [
+      {
+        "key": "projectid",
+        "operator": "=",
+        "value": "it-db-sas-cern"
+      },
+      {
+        "condition": "AND",
+        "key": "platform",
+        "operator": "=",
+        "value": "GCP"
+      }
+    ]
+  }
+],
+"thresholds": [],
+"timeFrom": null,
+"timeRegions": [],
+"timeShift": null,
+"title": "GCP Daily Consumption",
+"tooltip": {
+  "shared": true,
+  "sort": 0,
+  "value_type": "individual"
+},
+"type": "graph",
+"xaxis": {
+  "buckets": null,
+  "mode": "time",
+  "name": null,
+  "show": true,
+  "values": []
+},
+"yaxes": [
+  {
+    "$$hashKey": "object:765",
+    "decimals": null,
+    "format": "short",
+    "label": null,
+    "logBase": 1,
+    "max": null,
+    "min": null,
+    "show": true
+  },
+  {
+    "$$hashKey": "object:766",
+    "format": "short",
+    "label": null,
+    "logBase": 1,
+    "max": null,
+    "min": null,
+    "show": true
+  }
+],
+"yaxis": {
+  "align": false,
+  "alignLevel": null
+}
+},
+{
+"circleMaxSize": 30,
+"circleMinSize": 2,
+"colors": [
+  "rgba(245, 54, 54, 0.9)",
+  "rgba(237, 129, 40, 0.89)"
+],
+"datasource": "InfluxDB-remote",
+"decimals": 0,
+"esMetric": "Count",
+"fieldConfig": {
+  "defaults": {},
+  "overrides": []
+},
+"gridPos": {
+  "h": 22,
+  "w": 11,
+  "x": 13,
+  "y": 0
+},
+"hideEmpty": true,
+"hideZero": false,
+"id": 6,
+"initialZoom": "1",
+"locationData": "countries",
+"mapCenter": "(0°, 0°)",
+"mapCenterLatitude": 0,
+"mapCenterLongitude": 0,
+"maxDataPoints": 1,
+"mouseWheelZoom": true,
+"pluginVersion": "7.5.5",
+"showLegend": true,
+"stickyLabels": false,
+"tableQueryOptions": {
+  "geohashField": "geohash",
+  "latitudeField": "latitude",
+  "longitudeField": "longitude",
+  "metricField": "metric",
+  "queryType": "geohash"
+},
+"targets": [
+  {
+    "alias": "$tag_location",
+    "groupBy": [
+      {
+        "params": [
+          "location"
+        ],
+        "type": "tag"
+      }
+    ],
+    "measurement": "Location",
+    "orderByTime": "ASC",
+    "policy": "autogen",
+    "queryType": "randomWalk",
+    "refId": "A",
+    "resultFormat": "time_series",
+    "select": [
+      [
+        {
+          "params": [
+            "value"
+          ],
+          "type": "field"
+        },
+        {
+          "params": [],
+          "type": "sum"
+        }
+      ]
+    ],
+    "tags": [
+      {
+        "key": "location",
+        "operator": "=",
+        "value": "BE"
+      }
+    ]
+  },
+  {
+    "alias": "$tag_location",
+    "groupBy": [
+      {
+        "params": [
+          "location"
+        ],
+        "type": "tag"
+      }
+    ],
+    "hide": false,
+    "measurement": "Location",
+    "orderByTime": "ASC",
+    "policy": "autogen",
+    "queryType": "randomWalk",
+    "refId": "B",
+    "resultFormat": "time_series",
+    "select": [
+      [
+        {
+          "params": [
+            "value"
+          ],
+          "type": "field"
+        }
+      ]
+    ],
+    "tags": [
+      {
+        "key": "location",
+        "operator": "=",
+        "value": "DE"
+      }
+    ]
+  },
+  {
+    "alias": "$tag_location",
+    "groupBy": [
+      {
+        "params": [
+          "location"
+        ],
+        "type": "tag"
+      }
+    ],
+    "hide": false,
+    "measurement": "Location",
+    "orderByTime": "ASC",
+    "policy": "autogen",
+    "queryType": "randomWalk",
+    "refId": "C",
+    "resultFormat": "time_series",
+    "select": [
+      [
+        {
+          "params": [
+            "value"
+          ],
+          "type": "field"
+        }
+      ]
+    ],
+    "tags": [
+      {
+        "key": "location",
+        "operator": "=",
+        "value": "IE"
+      }
+    ]
+  },
+  {
+    "alias": "$tag_location",
+    "groupBy": [
+      {
+        "params": [
+          "location"
+        ],
+        "type": "tag"
+      }
+    ],
+    "hide": false,
+    "measurement": "Location",
+    "orderByTime": "ASC",
+    "policy": "autogen",
+    "queryType": "randomWalk",
+    "refId": "D",
+    "resultFormat": "time_series",
+    "select": [
+      [
+        {
+          "params": [
+            "value"
+          ],
+          "type": "field"
+        }
+      ]
+    ],
+    "tags": [
+      {
+        "key": "location",
+        "operator": "=",
+        "value": "NL"
+      }
+    ]
+  },
+  {
+    "alias": "$tag_location",
+    "groupBy": [
+      {
+        "params": [
+          "location"
+        ],
+        "type": "tag"
+      }
+    ],
+    "hide": false,
+    "measurement": "Location",
+    "orderByTime": "ASC",
+    "policy": "autogen",
+    "queryType": "randomWalk",
+    "refId": "E",
+    "resultFormat": "time_series",
+    "select": [
+      [
+        {
+          "params": [
+            "value"
+          ],
+          "type": "field"
+        }
+      ]
+    ],
+    "tags": [
+      {
+        "key": "location",
+        "operator": "=",
+        "value": "SG"
+      }
+    ]
+  },
+  {
+    "alias": "$tag_location",
+    "groupBy": [
+      {
+        "params": [
+          "location"
+        ],
+        "type": "tag"
+      }
+    ],
+    "hide": false,
+    "measurement": "Location",
+    "orderByTime": "ASC",
+    "policy": "autogen",
+    "queryType": "randomWalk",
+    "refId": "F",
+    "resultFormat": "time_series",
+    "select": [
+      [
+        {
+          "params": [
+            "value"
+          ],
+          "type": "field"
+        }
+      ]
+    ],
+    "tags": [
+      {
+        "key": "location",
+        "operator": "=",
+        "value": "US"
+      }
+    ]
+  }
+],
+"thresholds": "1000",
+"title": "Number of GCP services per Location",
+"type": "grafana-worldmap-panel",
+"unitPlural": "",
+"unitSingle": "",
+"valueName": "total"
+},
+{
+"aliasColors": {},
+"bars": false,
+"dashLength": 10,
+"dashes": false,
+"datasource": "InfluxDB-remote",
+"description": "",
+"fieldConfig": {
+  "defaults": {},
+  "overrides": []
+},
+"fill": 1,
+"fillGradient": 0,
+"gridPos": {
+  "h": 7,
+  "w": 13,
+  "x": 0,
+  "y": 8
+},
+"hiddenSeries": false,
+"id": 3,
+"legend": {
+  "avg": false,
+  "current": false,
+  "max": false,
+  "min": false,
+  "show": true,
+  "total": false,
+  "values": false
+},
+"lines": true,
+"linewidth": 1,
+"nullPointMode": "null",
+"options": {
+  "alertThreshold": true
+},
+"percentage": false,
+"pluginVersion": "7.5.5",
+"pointradius": 2,
+"points": false,
+"renderer": "flot",
+"seriesOverrides": [],
+"spaceLength": 10,
+"stack": false,
+"steppedLine": false,
+"targets": [
+  {
+    "alias": "$tag_projectid",
+    "groupBy": [
+      {
+        "params": [
+          "projectid"
+        ],
+        "type": "tag"
+      }
+    ],
+    "measurement": "amountSpent",
+    "orderByTime": "ASC",
+    "policy": "autogen",
+    "queryType": "randomWalk",
+    "refId": "A",
+    "resultFormat": "time_series",
+    "select": [
+      [
+        {
+          "params": [
+            "value"
+          ],
+          "type": "field"
+        },
+        {
+          "params": [],
+          "type": "cumulative_sum"
+        }
+      ]
+    ],
+    "tags": [
+      {
+        "key": "projectid",
+        "operator": "=",
+        "value": "beop-teabt-cern"
+      },
+      {
+        "condition": "AND",
+        "key": "platform",
+        "operator": "=",
+        "value": "GCP"
+      }
+    ]
+  },
+  {
+    "alias": "$tag_projectid",
+    "groupBy": [
+      {
+        "params": [
+          "projectid"
+        ],
+        "type": "tag"
+      }
+    ],
+    "measurement": "amountSpent",
+    "orderByTime": "ASC",
+    "policy": "autogen",
+    "queryType": "randomWalk",
+    "refId": "B",
+    "resultFormat": "time_series",
+    "select": [
+      [
+        {
+          "params": [
+            "value"
+          ],
+          "type": "field"
+        },
+        {
+          "params": [],
+          "type": "cumulative_sum"
+        }
+      ]
+    ],
+    "tags": [
+      {
+        "key": "projectid",
+        "operator": "=",
+        "value": "it-atlas-cern"
+      },
+      {
+        "condition": "AND",
+        "key": "platform",
+        "operator": "=",
+        "value": "GCP"
+      }
+    ]
+  },
+  {
+    "alias": "$tag_projectid",
+    "groupBy": [
+      {
+        "params": [
+          "projectid"
+        ],
+        "type": "tag"
+      }
+    ],
+    "measurement": "amountSpent",
+    "orderByTime": "ASC",
+    "policy": "autogen",
+    "queryType": "randomWalk",
+    "refId": "C",
+    "resultFormat": "time_series",
+    "select": [
+      [
+        {
+          "params": [
+            "value"
+          ],
+          "type": "field"
+        },
+        {
+          "params": [],
+          "type": "cumulative_sum"
+        }
+      ]
+    ],
+    "tags": [
+      {
+        "key": "projectid",
+        "operator": "=",
+        "value": "alice-cern"
+      },
+      {
+        "condition": "AND",
+        "key": "platform",
+        "operator": "=",
+        "value": "GCP"
+      }
+    ]
+  },
+  {
+    "alias": "$tag_projectid",
+    "groupBy": [
+      {
+        "params": [
+          "projectid"
+        ],
+        "type": "tag"
+      }
+    ],
+    "measurement": "amountSpent",
+    "orderByTime": "ASC",
+    "policy": "autogen",
+    "queryType": "randomWalk",
+    "refId": "D",
+    "resultFormat": "time_series",
+    "select": [
+      [
+        {
+          "params": [
+            "value"
+          ],
+          "type": "field"
+        },
+        {
+          "params": [],
+          "type": "cumulative_sum"
+        }
+      ]
+    ],
+    "tags": [
+      {
+        "key": "projectid",
+        "operator": "=",
+        "value": "escapedatalake"
+      },
+      {
+        "condition": "AND",
+        "key": "platform",
+        "operator": "=",
+        "value": "GCP"
+      }
+    ]
+  },
+  {
+    "alias": "$tag_projectid",
+    "groupBy": [
+      {
+        "params": [
+          "projectid"
+        ],
+        "type": "tag"
+      }
+    ],
+    "measurement": "amountSpent",
+    "orderByTime": "ASC",
+    "policy": "autogen",
+    "queryType": "randomWalk",
+    "refId": "E",
+    "resultFormat": "time_series",
+    "select": [
+      [
+        {
+          "params": [
+            "value"
+          ],
+          "type": "field"
+        },
+        {
+          "params": [],
+          "type": "cumulative_sum"
+        }
+      ]
+    ],
+    "tags": [
+      {
+        "key": "projectid",
+        "operator": "=",
+        "value": "generaltest-cern"
+      },
+      {
+        "condition": "AND",
+        "key": "platform",
+        "operator": "=",
+        "value": "GCP"
+      }
+    ]
+  },
+  {
+    "alias": "$tag_projectid",
+    "groupBy": [
+      {
+        "params": [
+          "projectid"
+        ],
+        "type": "tag"
+      }
+    ],
+    "measurement": "amountSpent",
+    "orderByTime": "ASC",
+    "policy": "autogen",
+    "queryType": "randomWalk",
+    "refId": "F",
+    "resultFormat": "time_series",
+    "select": [
+      [
+        {
+          "params": [
+            "value"
+          ],
+          "type": "field"
+        },
+        {
+          "params": [],
+          "type": "cumulative_sum"
+        }
+      ]
+    ],
+    "tags": [
+      {
+        "key": "projectid",
+        "operator": "=",
+        "value": "it-openlab-cern"
+      },
+      {
+        "condition": "AND",
+        "key": "platform",
+        "operator": "=",
+        "value": "GCP"
+      }
+    ]
+  },
+  {
+    "alias": "$tag_projectid",
+    "groupBy": [
+      {
+        "params": [
+          "projectid"
+        ],
+        "type": "tag"
+      }
+    ],
+    "measurement": "amountSpent",
+    "orderByTime": "ASC",
+    "policy": "autogen",
+    "queryType": "randomWalk",
+    "refId": "G",
+    "resultFormat": "time_series",
+    "select": [
+      [
+        {
+          "params": [
+            "value"
+          ],
+          "type": "field"
+        },
+        {
+          "params": [],
+          "type": "cumulative_sum"
+        }
+      ]
+    ],
+    "tags": [
+      {
+        "key": "projectid",
+        "operator": "=",
+        "value": "cms-opendata"
+      },
+      {
+        "condition": "AND",
+        "key": "platform",
+        "operator": "=",
+        "value": "GCP"
+      }
+    ]
+  },
+  {
+    "alias": "$tag_projectid",
+    "groupBy": [
+      {
+        "params": [
+          "projectid"
+        ],
+        "type": "tag"
+      }
+    ],
+    "measurement": "amountSpent",
+    "orderByTime": "ASC",
+    "policy": "autogen",
+    "queryType": "randomWalk",
+    "refId": "H",
+    "resultFormat": "time_series",
+    "select": [
+      [
+        {
+          "params": [
+            "value"
+          ],
+          "type": "field"
+        },
+        {
+          "params": [],
+          "type": "cumulative_sum"
+        }
+      ]
+    ],
+    "tags": [
+      {
+        "key": "projectid",
+        "operator": "=",
+        "value": "it-db-sas-cern"
+      },
+      {
+        "condition": "AND",
+        "key": "platform",
+        "operator": "=",
+        "value": "GCP"
+      }
+    ]
+  }
+],
+"thresholds": [],
+"timeFrom": null,
+"timeRegions": [],
+"timeShift": null,
+"title": "GCP Daily Consumption (aggregated)",
+"tooltip": {
+  "shared": true,
+  "sort": 0,
+  "value_type": "individual"
+},
+"type": "graph",
+"xaxis": {
+  "buckets": null,
+  "mode": "time",
+  "name": null,
+  "show": true,
+  "values": []
+},
+"yaxes": [
+  {
+    "decimals": null,
+    "format": "short",
+    "label": null,
+    "logBase": 1,
+    "max": null,
+    "min": null,
+    "show": true
+  },
+  {
+    "format": "short",
+    "label": null,
+    "logBase": 1,
+    "max": null,
+    "min": null,
+    "show": true
+  }
+],
+"yaxis": {
+  "align": false,
+  "alignLevel": null
+}
+},
+{
+"datasource": "InfluxDB-remote",
+"description": "",
+"fieldConfig": {
+  "defaults": {
+    "color": {
+      "mode": "thresholds"
+    },
+    "mappings": [],
+    "thresholds": {
+      "mode": "absolute",
+      "steps": [
+        {
+          "color": "green",
+          "value": null
+        },
+        {
+          "color": "red",
+          "value": 80
+        }
+      ]
+    }
+  },
+  "overrides": []
+},
+"gridPos": {
+  "h": 7,
+  "w": 13,
+  "x": 0,
+  "y": 15
+},
+"id": 4,
+"options": {
+  "displayMode": "gradient",
+  "orientation": "horizontal",
+  "reduceOptions": {
+    "calcs": [
+      "lastNotNull"
+    ],
+    "fields": "",
+    "values": false
+  },
+  "showUnfilled": true,
+  "text": {}
+},
+"pluginVersion": "7.5.5",
+"targets": [
+  {
+    "alias": "$tag_projectid",
+    "groupBy": [
+      {
+        "params": [
+          "projectid"
+        ],
+        "type": "tag"
+      }
+    ],
+    "measurement": "amountSpent",
+    "orderByTime": "ASC",
+    "policy": "autogen",
+    "queryType": "randomWalk",
+    "refId": "A",
+    "resultFormat": "time_series",
+    "select": [
+      [
+        {
+          "params": [
+            "value"
+          ],
+          "type": "field"
+        },
+        {
+          "params": [],
+          "type": "cumulative_sum"
+        }
+      ]
+    ],
+    "tags": [
+      {
+        "key": "projectid",
+        "operator": "=",
+        "value": "beop-teabt-cern"
+      },
+      {
+        "condition": "AND",
+        "key": "platform",
+        "operator": "=",
+        "value": "GCP"
+      }
+    ]
+  },
+  {
+    "alias": "$tag_projectid",
+    "groupBy": [
+      {
+        "params": [
+          "projectid"
+        ],
+        "type": "tag"
+      }
+    ],
+    "measurement": "amountSpent",
+    "orderByTime": "ASC",
+    "policy": "autogen",
+    "queryType": "randomWalk",
+    "refId": "B",
+    "resultFormat": "time_series",
+    "select": [
+      [
+        {
+          "params": [
+            "value"
+          ],
+          "type": "field"
+        },
+        {
+          "params": [],
+          "type": "cumulative_sum"
+        }
+      ]
+    ],
+    "tags": [
+      {
+        "key": "projectid",
+        "operator": "=",
+        "value": "it-atlas-cern"
+      },
+      {
+        "condition": "AND",
+        "key": "platform",
+        "operator": "=",
+        "value": "GCP"
+      }
+    ]
+  },
+  {
+    "alias": "$tag_projectid",
+    "groupBy": [
+      {
+        "params": [
+          "projectid"
+        ],
+        "type": "tag"
+      }
+    ],
+    "measurement": "amountSpent",
+    "orderByTime": "ASC",
+    "policy": "autogen",
+    "queryType": "randomWalk",
+    "refId": "C",
+    "resultFormat": "time_series",
+    "select": [
+      [
+        {
+          "params": [
+            "value"
+          ],
+          "type": "field"
+        },
+        {
+          "params": [],
+          "type": "cumulative_sum"
+        }
+      ]
+    ],
+    "tags": [
+      {
+        "key": "projectid",
+        "operator": "=",
+        "value": "alice-cern"
+      },
+      {
+        "condition": "AND",
+        "key": "platform",
+        "operator": "=",
+        "value": "GCP"
+      }
+    ]
+  },
+  {
+    "alias": "$tag_projectid",
+    "groupBy": [
+      {
+        "params": [
+          "projectid"
+        ],
+        "type": "tag"
+      }
+    ],
+    "measurement": "amountSpent",
+    "orderByTime": "ASC",
+    "policy": "autogen",
+    "queryType": "randomWalk",
+    "refId": "D",
+    "resultFormat": "time_series",
+    "select": [
+      [
+        {
+          "params": [
+            "value"
+          ],
+          "type": "field"
+        },
+        {
+          "params": [],
+          "type": "cumulative_sum"
+        }
+      ]
+    ],
+    "tags": [
+      {
+        "key": "projectid",
+        "operator": "=",
+        "value": "escapedatalake"
+      },
+      {
+        "condition": "AND",
+        "key": "platform",
+        "operator": "=",
+        "value": "GCP"
+      }
+    ]
+  },
+  {
+    "alias": "$tag_projectid",
+    "groupBy": [
+      {
+        "params": [
+          "projectid"
+        ],
+        "type": "tag"
+      }
+    ],
+    "measurement": "amountSpent",
+    "orderByTime": "ASC",
+    "policy": "autogen",
+    "queryType": "randomWalk",
+    "refId": "E",
+    "resultFormat": "time_series",
+    "select": [
+      [
+        {
+          "params": [
+            "value"
+          ],
+          "type": "field"
+        },
+        {
+          "params": [],
+          "type": "cumulative_sum"
+        }
+      ]
+    ],
+    "tags": [
+      {
+        "key": "projectid",
+        "operator": "=",
+        "value": "generaltest-cern"
+      },
+      {
+        "condition": "AND",
+        "key": "platform",
+        "operator": "=",
+        "value": "GCP"
+      }
+    ]
+  },
+  {
+    "alias": "$tag_projectid",
+    "groupBy": [
+      {
+        "params": [
+          "projectid"
+        ],
+        "type": "tag"
+      }
+    ],
+    "measurement": "amountSpent",
+    "orderByTime": "ASC",
+    "policy": "autogen",
+    "queryType": "randomWalk",
+    "refId": "F",
+    "resultFormat": "time_series",
+    "select": [
+      [
+        {
+          "params": [
+            "value"
+          ],
+          "type": "field"
+        },
+        {
+          "params": [],
+          "type": "cumulative_sum"
+        }
+      ]
+    ],
+    "tags": [
+      {
+        "key": "projectid",
+        "operator": "=",
+        "value": "it-openlab-cern"
+      },
+      {
+        "condition": "AND",
+        "key": "platform",
+        "operator": "=",
+        "value": "GCP"
+      }
+    ]
+  },
+  {
+    "alias": "$tag_projectid",
+    "groupBy": [
+      {
+        "params": [
+          "projectid"
+        ],
+        "type": "tag"
+      }
+    ],
+    "measurement": "amountSpent",
+    "orderByTime": "ASC",
+    "policy": "autogen",
+    "queryType": "randomWalk",
+    "refId": "G",
+    "resultFormat": "time_series",
+    "select": [
+      [
+        {
+          "params": [
+            "value"
+          ],
+          "type": "field"
+        },
+        {
+          "params": [],
+          "type": "cumulative_sum"
+        }
+      ]
+    ],
+    "tags": [
+      {
+        "key": "projectid",
+        "operator": "=",
+        "value": "cms-opendata"
+      },
+      {
+        "condition": "AND",
+        "key": "platform",
+        "operator": "=",
+        "value": "GCP"
+      }
+    ]
+  },
+  {
+    "alias": "$tag_projectid",
+    "groupBy": [
+      {
+        "params": [
+          "projectid"
+        ],
+        "type": "tag"
+      }
+    ],
+    "measurement": "amountSpent",
+    "orderByTime": "ASC",
+    "policy": "autogen",
+    "queryType": "randomWalk",
+    "refId": "H",
+    "resultFormat": "time_series",
+    "select": [
+      [
+        {
+          "params": [
+            "value"
+          ],
+          "type": "field"
+        },
+        {
+          "params": [],
+          "type": "cumulative_sum"
+        }
+      ]
+    ],
+    "tags": [
+      {
+        "key": "projectid",
+        "operator": "=",
+        "value": "it-db-sas-cern"
+      },
+      {
+        "condition": "AND",
+        "key": "platform",
+        "operator": "=",
+        "value": "GCP"
+      }
+    ]
+  }
+],
+"timeFrom": null,
+"timeShift": null,
+"title": "GCP Total Consumption",
+"type": "bargauge"
+}
+],
+"refresh": false,
+"schemaVersion": 27,
+"style": "dark",
+"tags": [],
+"templating": {
+"list": []
+},
+"time": {
+"from": "2020-10-31T23:00:00.000Z",
+"to": "now"
+},
+"timepicker": {},
+"timezone": "",
+"title": "Google Cloud Platform",
+"uid": "7CirYdR7k",
+"version": 22
+},
   "folderId": 0,
   "overwrite": true
 }
