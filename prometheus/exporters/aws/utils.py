@@ -121,10 +121,8 @@ def getAWS():
     AmountPerId_dict = AmountPerId.to_dict()["lineItem/UnblendedCost"]
     LocationPerId_dict = LocationPerId.to_dict()["lineItem/UnblendedCost"]
     ###### Structure data as needed
-    AWS_data = {
-                "amountSpent": AmountPerId_dict,
-                "location": LocationPerId_dict
-               }
+    #AWS_data = {
+    #            "amountSpent": AmountPerId_dict, "location": LocationPerId_dict
+    #           }
 
-    print(AWS_data)
-    return AWS_data
+    return {"amountSpent": AmountPerId_dict, "location": LocationPerId_dict}

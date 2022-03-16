@@ -199,4 +199,4 @@ def getGCP():
     locationPerId_dict = NumPerLocation.to_dict()["service"]
 
 
-    return {"amountSpent": AmountPerId_dict,  "Location": locationPerId_dict}
+    return {"amountSpent": AmountPerId_dict, "location": locationPerId_dict}
