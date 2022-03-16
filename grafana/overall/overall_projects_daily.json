@@ -1,5 +1,5 @@
 {
-"dashboard": {
+  "dashboard": {
   "annotations": {
     "list": [
       {
@@ -38,8 +38,8 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 9,
-        "w": 12,
+        "h": 12,
+        "w": 13,
         "x": 0,
         "y": 0
       },
@@ -299,9 +299,9 @@
         ]
       },
       "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 12,
+        "h": 12,
+        "w": 11,
+        "x": 13,
         "y": 0
       },
       "id": 4,
@@ -473,9 +473,9 @@
       },
       "gridPos": {
         "h": 9,
-        "w": 12,
+        "w": 13,
         "x": 0,
-        "y": 9
+        "y": 12
       },
       "id": 5,
       "options": {
@@ -687,9 +687,9 @@
       },
       "gridPos": {
         "h": 9,
-        "w": 12,
-        "x": 12,
-        "y": 9
+        "w": 11,
+        "x": 13,
+        "y": 12
       },
       "id": 6,
       "options": {
@@ -837,14 +837,14 @@
     "list": []
   },
   "time": {
-    "from": "now-2y",
+    "from": "2020-10-31T23:00:00.000Z",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Overall Consumption",
   "uid": "Qaaf04f7z",
-  "version": 3
+  "version": 7
 },
 "folderId": 0,
 "overwrite": true

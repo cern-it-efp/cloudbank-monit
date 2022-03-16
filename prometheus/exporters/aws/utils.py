@@ -100,7 +100,8 @@ def getAWS():
     ###### Load the obtained CSV file as a Pandas DataFrame with specific columns
     df = pd.read_csv(local_path + '/file.csv',usecols = ['lineItem/UsageStartDate',
                                                         'lineItem/UsageAccountId',
-                                                        'lineItem/UnblendedCost'])
+                                                        'lineItem/UnblendedCost',
+                                                        'product/location'])
 
     ###### Filter data: take only the consumption from the last 24 hours
     period = 48
@@ -110,19 +111,19 @@ def getAWS():
 
     ###### Group by UsageAccountId (projects) and sum: the sum is done for all the columns that contain numbers. The others are left out
     AmountPerId = latestConsumption.groupby('lineItem/UsageAccountId').sum()
-
+    LocationPerId = latestConsumption.groupby('product/location').count()
     ###### Use the function getGroups() to get a dictionary containing properties, groupdID:name
     projects_dict = getGroups()
 
     ###### Rename the DataFrame's row names: replace each project ID with its name
     AmountPerId = AmountPerId.rename(projects_dict, axis='index')
-
     ###### Convert the obtained DataFrame to dict
     AmountPerId_dict = AmountPerId.to_dict()["lineItem/UnblendedCost"]
-
+    LocationPerId_dict = LocationPerId.to_dict()["lineItem/UnblendedCost"]
     ###### Structure data as needed
     AWS_data = {
-                "amountSpent": AmountPerId_dict
+                "amountSpent": AmountPerId_dict,
+                "location": LocationPerId_dict
                }
 
     print(AWS_data)

@@ -25,10 +25,14 @@ class AWSCollector(object):
         for key1, value1 in getAWS().items():
             # key1: metric name
             # value1: metric values for all projects
+            if key1 == "amountSpent":
+                metric_label = 'projectid'
+            else:
+                metric_label = 'location'
 
             counterMetric = UnknownMetricFamily("%s" % key1,
                                                 'Help text',
-                                                labels=['platform','projectid'])
+                                                labels=['platform',metric_label])
 
             for key2, value2 in value1.items():
                 # key2: project name
