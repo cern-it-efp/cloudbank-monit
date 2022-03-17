@@ -10,6 +10,7 @@ import numpy as np
 import json
 import config
 import datetime as dt
+import string
 
 local_path = "C:/Users/atheodor/AppData/Local/Temp"
 local_path = "/tmp"
@@ -102,8 +103,13 @@ def getAWS():
                                                         'lineItem/UsageAccountId',
                                                         'lineItem/UnblendedCost',
                                                         'product/location'])
+    df.rename(columns = {'product/location':'productlocation'}, inplace = True)
 
+    #df[['continent','country']] = df['productlocation'].str.split('(', expand=True)
+
+    df[['continent','country']]= df.productlocation.str.split('\(|\)', expand=True).iloc[:,[0,1]]
     ###### Filter data: take only the consumption from the last 24 hours
+    print(df)
     period = 48
     df["lineItem/UsageStartDate"] = pd.to_datetime(df["lineItem/UsageStartDate"]).dt.tz_localize(None)
     startTime = (dt.datetime.now()-dt.timedelta(hours=period))
@@ -111,7 +117,7 @@ def getAWS():
 
     ###### Group by UsageAccountId (projects) and sum: the sum is done for all the columns that contain numbers. The others are left out
     AmountPerId = latestConsumption.groupby('lineItem/UsageAccountId').sum()
-    LocationPerId = latestConsumption.groupby('product/location').count()
+    LocationPerId = latestConsumption.groupby('country').count()
     ###### Use the function getGroups() to get a dictionary containing properties, groupdID:name
     projects_dict = getGroups()
 
@@ -122,7 +128,7 @@ def getAWS():
     LocationPerId_dict = LocationPerId.to_dict()["lineItem/UnblendedCost"]
     ###### Structure data as needed
     #AWS_data = {
-    #            "amountSpent": AmountPerId_dict, "location": LocationPerId_dict
-    #           }
+    #           "amountSpent": AmountPerId_dict, "location": LocationPerId_dict
+    #          }
 
     return {"amountSpent": AmountPerId_dict, "location": LocationPerId_dict}
