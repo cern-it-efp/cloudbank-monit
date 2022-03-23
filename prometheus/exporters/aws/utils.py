@@ -11,9 +11,6 @@ import json
 import config
 import datetime as dt
 import string
-import geonamescache
-from geonamescache.mappers import country
-import pycountry
 
 
 local_path = "C:/Users/atheodor/AppData/Local/Temp"
