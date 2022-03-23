@@ -11,10 +11,47 @@ import json
 import config
 import datetime as dt
 import string
+import geonamescache
+from geonamescache.mappers import country
+import pycountry
+
 
 local_path = "C:/Users/atheodor/AppData/Local/Temp"
 local_path = "/tmp"
 
+# def aws_region_to_country(region_from_csv):
+#     # TODO - complete with https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html
+#     all_aws_regions = {
+#         "us-east-2": "US",
+#         "us-east-1": "US",
+#         "us-west-1": "US",
+#         "us-west-2": "US",
+#         "af-south-1": "ZA",
+#         "ap-east-1": "HK",
+#         "ap-southeast-3	": "ID",
+#         "ap-south-1": "IN",
+#         "ap-northeast-3": "JP",
+#         "ap-northeast-2": "KR",
+#         "ap-southeast-1": "SG",
+#         "ap-southeast-2": "AU",
+#         "ap-northeast-1": "JP",
+#         "ca-central-1": "CA",
+#         "eu-central-1": "DE",
+#         "eu-west-1": "IR",
+#         "eu-west-2": "GB",
+#         "eu-south-1": "IT",
+#         "eu-west-3": "FR",
+#         "eu-north-1": "SE",
+#         "me-south-1": "BH",
+#         "sa-east-1": "BR",
+#         "us-gov-east-1": "US",
+#         "us-gov-west-1": "US"
+#     }
+#     try:
+#         return all_aws_regions[region_from_csv]
+#     except:
+#         return "Error"
+#print(aws_region_to_country("sa-east-1"))
 
 def getGroups():
     """ Returns a dictionary containing properties, groupdID:name. """
@@ -102,14 +139,24 @@ def getAWS():
     df = pd.read_csv(local_path + '/file.csv',usecols = ['lineItem/UsageStartDate',
                                                         'lineItem/UsageAccountId',
                                                         'lineItem/UnblendedCost',
-                                                        'product/location'])
-    df.rename(columns = {'product/location':'productlocation'}, inplace = True)
-
+                                                        'product/location',
+                                                        'product/region'])
+    #df.rename(columns = {'product/region':'productregion'}, inplace = True)
     #df[['continent','country']] = df['productlocation'].str.split('(', expand=True)
+    #df[['region','city']]= df.productlocation.str.split('\(|\)', expand=True).iloc[:,[0,1]]
+    #df[['continent','direction']]= df.region.str.split(' ', expand=True).iloc[:,[0,1]]
 
-    df[['continent','country']]= df.productlocation.str.split('\(|\)', expand=True).iloc[:,[0,1]]
     ###### Filter data: take only the consumption from the last 24 hours
+
+
+    #df[['country']] = df.productregion.aws_region_to_country("productregion")
+    #df.loc[df['productregion'] == 'us-east-2', 'productregion'] = 'US'
+    #df
+    df['product/region'] = df['product/region'].replace(['us-east-2','us-east-1','us-west-1','us-west-2','af-south-1','ap-east-1','ap-southeast-3','ap-south-1','ap-northeast-3','ap-northeast-2','ap-southeast-1','ap-southeast-2','ap-northeast-1','ca-central-1','eu-central-1','eu-west-1','eu-west-2','eu-south-1','eu-west-3','eu-north-1','me-south-1','sa-east-1','us-gov-east-1','us-gov-west-1'],
+                                                      ['US','US','US','US','ZA','HK','ID','IN','JP','KR','SG','AU','JP','CA','DE','IR','GB','IT','FR','SE','BH','BR','US','US'])
+
     print(df)
+    #df[['countries']] = mapper
     period = 48
     df["lineItem/UsageStartDate"] = pd.to_datetime(df["lineItem/UsageStartDate"]).dt.tz_localize(None)
     startTime = (dt.datetime.now()-dt.timedelta(hours=period))
@@ -117,7 +164,7 @@ def getAWS():
 
     ###### Group by UsageAccountId (projects) and sum: the sum is done for all the columns that contain numbers. The others are left out
     AmountPerId = latestConsumption.groupby('lineItem/UsageAccountId').sum()
-    LocationPerId = latestConsumption.groupby('country').count()
+    LocationPerId = latestConsumption.groupby('product/region').count()
     ###### Use the function getGroups() to get a dictionary containing properties, groupdID:name
     projects_dict = getGroups()
 
