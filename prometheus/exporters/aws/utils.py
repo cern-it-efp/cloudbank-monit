@@ -112,7 +112,7 @@ def getAWS():
     #df.loc[df['productregion'] == 'us-east-2', 'productregion'] = 'US'
 
     df['product/region'] = df['product/region'].replace(['us-east-2','us-east-1','us-west-1','us-west-2','af-south-1','ap-east-1','ap-southeast-3','ap-south-1','ap-northeast-3','ap-northeast-2','ap-southeast-1','ap-southeast-2','ap-northeast-1','ca-central-1','eu-central-1','eu-west-1','eu-west-2','eu-south-1','eu-west-3','eu-north-1','me-south-1','sa-east-1','us-gov-east-1','us-gov-west-1'],
-                                                      ['US','US','US','US','ZA','HK','ID','IN','JP','KR','SG','AU','JP','CA','DE','IR','GB','IT','FR','SE','BH','BR','US','US'])
+                                                      ['US','US','US','US','ZA','HK','ID','IN','JP','KR','SG','AU','JP','CA','DE','IE','GB','IT','FR','SE','BH','BR','US','US'])
     ###### Filter data: take only the consumption from the last 24 hours
     period = 48
     df["lineItem/UsageStartDate"] = pd.to_datetime(df["lineItem/UsageStartDate"]).dt.tz_localize(None)
