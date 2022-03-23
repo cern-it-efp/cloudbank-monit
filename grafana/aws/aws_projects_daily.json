@@ -32,7 +32,7 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 12,
+        "h": 8,
         "w": 14,
         "x": 0,
         "y": 0
@@ -707,65 +707,64 @@
       }
     },
     {
+      "circleMaxSize": 30,
+      "circleMinSize": "10",
+      "colors": [
+        "rgba(245, 54, 54, 0.9)",
+        "rgba(237, 129, 40, 0.89)",
+        "rgba(50, 172, 45, 0.97)"
+      ],
       "datasource": "InfluxDB-remote",
+      "decimals": 0,
+      "esMetric": "Count",
       "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
+        "defaults": {},
         "overrides": []
       },
       "gridPos": {
-        "h": 12,
+        "h": 13,
         "w": 10,
         "x": 14,
         "y": 0
       },
-      "id": 4,
-      "options": {
-        "displayMode": "gradient",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "text": {}
-      },
+      "hideEmpty": false,
+      "hideZero": false,
+      "id": 7,
+      "initialZoom": "2",
+      "jsonUrl": "",
+      "locationData": "countries",
+      "mapCenter": "(0°, 0°)",
+      "mapCenterLatitude": 0,
+      "mapCenterLongitude": 0,
+      "maxDataPoints": 1,
+      "mouseWheelZoom": false,
       "pluginVersion": "7.5.5",
+      "showLegend": true,
+      "stickyLabels": false,
+      "tableQueryOptions": {
+        "geohashField": "geohash",
+        "latitudeField": "latitude",
+        "longitudeField": "longitude",
+        "metricField": "metric",
+        "queryType": "coordinates"
+      },
       "targets": [
         {
-          "alias": "$tag_projectid",
+          "alias": "$tag_location",
           "groupBy": [
             {
               "params": [
-                "projectid"
+                "location"
               ],
               "type": "tag"
             }
           ],
-          "measurement": "amountSpent",
+          "measurement": "location",
           "orderByTime": "ASC",
           "policy": "autogen",
+          "query": "SELECT cumulative_sum(\"value\") FROM \"autogen\".\"location\" WHERE (\"platform\" = 'AWS') AND $timeFilter GROUP BY \"location\"",
           "queryType": "randomWalk",
+          "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -784,628 +783,6 @@
           ],
           "tags": [
             {
-              "key": "projectid",
-              "operator": "=",
-              "value": "Openlab"
-            },
-            {
-              "condition": "AND",
-              "key": "platform",
-              "operator": "=",
-              "value": "AWS"
-            }
-          ]
-        },
-        {
-          "alias": "$tag_projectid",
-          "groupBy": [
-            {
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }
-          ],
-          "measurement": "amountSpent",
-          "orderByTime": "ASC",
-          "policy": "autogen",
-          "queryType": "randomWalk",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "cumulative_sum"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "projectid",
-              "operator": "=",
-              "value": "253635982411"
-            },
-            {
-              "condition": "AND",
-              "key": "platform",
-              "operator": "=",
-              "value": "AWS"
-            }
-          ]
-        },
-        {
-          "alias": "$tag_projectid",
-          "groupBy": [
-            {
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }
-          ],
-          "measurement": "amountSpent",
-          "orderByTime": "ASC",
-          "policy": "autogen",
-          "queryType": "randomWalk",
-          "refId": "C",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "cumulative_sum"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "projectid",
-              "operator": "=",
-              "value": "622943311693"
-            },
-            {
-              "condition": "AND",
-              "key": "platform",
-              "operator": "=",
-              "value": "AWS"
-            }
-          ]
-        },
-        {
-          "alias": "$tag_projectid",
-          "groupBy": [
-            {
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }
-          ],
-          "measurement": "amountSpent",
-          "orderByTime": "ASC",
-          "policy": "autogen",
-          "queryType": "randomWalk",
-          "refId": "D",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "cumulative_sum"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "projectid",
-              "operator": "=",
-              "value": "ATLAS"
-            },
-            {
-              "condition": "AND",
-              "key": "platform",
-              "operator": "=",
-              "value": "AWS"
-            }
-          ]
-        },
-        {
-          "alias": "$tag_projectid",
-          "groupBy": [
-            {
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }
-          ],
-          "measurement": "amountSpent",
-          "orderByTime": "ASC",
-          "policy": "autogen",
-          "queryType": "randomWalk",
-          "refId": "E",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "cumulative_sum"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "projectid",
-              "operator": "=",
-              "value": "CMS"
-            },
-            {
-              "condition": "AND",
-              "key": "platform",
-              "operator": "=",
-              "value": "AWS"
-            }
-          ]
-        },
-        {
-          "alias": "$tag_projectid",
-          "groupBy": [
-            {
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }
-          ],
-          "measurement": "amountSpent",
-          "orderByTime": "ASC",
-          "policy": "autogen",
-          "queryType": "randomWalk",
-          "refId": "F",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "cumulative_sum"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "projectid",
-              "operator": "=",
-              "value": "618456240250"
-            },
-            {
-              "condition": "AND",
-              "key": "platform",
-              "operator": "=",
-              "value": "AWS"
-            }
-          ]
-        },
-        {
-          "alias": "$tag_projectid",
-          "groupBy": [
-            {
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }
-          ],
-          "measurement": "amountSpent",
-          "orderByTime": "ASC",
-          "policy": "autogen",
-          "queryType": "randomWalk",
-          "refId": "G",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "cumulative_sum"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "projectid",
-              "operator": "=",
-              "value": "EP-CMG"
-            },
-            {
-              "condition": "AND",
-              "key": "platform",
-              "operator": "=",
-              "value": "AWS"
-            }
-          ]
-        },
-        {
-          "alias": "$tag_projectid",
-          "groupBy": [
-            {
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }
-          ],
-          "measurement": "amountSpent",
-          "orderByTime": "ASC",
-          "policy": "autogen",
-          "queryType": "randomWalk",
-          "refId": "H",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "cumulative_sum"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "projectid",
-              "operator": "=",
-              "value": "LHCb"
-            },
-            {
-              "condition": "AND",
-              "key": "platform",
-              "operator": "=",
-              "value": "AWS"
-            }
-          ]
-        },
-        {
-          "alias": "$tag_projectid",
-          "groupBy": [
-            {
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }
-          ],
-          "measurement": "amountSpent",
-          "orderByTime": "ASC",
-          "policy": "autogen",
-          "queryType": "randomWalk",
-          "refId": "I",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "cumulative_sum"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "projectid",
-              "operator": "=",
-              "value": "IT-DB-IA"
-            },
-            {
-              "condition": "AND",
-              "key": "platform",
-              "operator": "=",
-              "value": "AWS"
-            }
-          ]
-        },
-        {
-          "alias": "$tag_projectid",
-          "groupBy": [
-            {
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }
-          ],
-          "measurement": "amountSpent",
-          "orderByTime": "ASC",
-          "policy": "autogen",
-          "queryType": "randomWalk",
-          "refId": "J",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "cumulative_sum"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "projectid",
-              "operator": "=",
-              "value": "357458753298"
-            },
-            {
-              "condition": "AND",
-              "key": "platform",
-              "operator": "=",
-              "value": "AWS"
-            }
-          ]
-        },
-        {
-          "alias": "$tag_projectid",
-          "groupBy": [
-            {
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }
-          ],
-          "measurement": "amountSpent",
-          "orderByTime": "ASC",
-          "policy": "autogen",
-          "queryType": "randomWalk",
-          "refId": "K",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "cumulative_sum"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "projectid",
-              "operator": "=",
-              "value": "ALICE"
-            },
-            {
-              "condition": "AND",
-              "key": "platform",
-              "operator": "=",
-              "value": "AWS"
-            }
-          ]
-        },
-        {
-          "alias": "$tag_projectid",
-          "groupBy": [
-            {
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }
-          ],
-          "measurement": "amountSpent",
-          "orderByTime": "ASC",
-          "policy": "autogen",
-          "queryType": "randomWalk",
-          "refId": "L",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "cumulative_sum"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "projectid",
-              "operator": "=",
-              "value": "BE-OP_TE-ABT"
-            },
-            {
-              "condition": "AND",
-              "key": "platform",
-              "operator": "=",
-              "value": "AWS"
-            }
-          ]
-        },
-        {
-          "alias": "$tag_projectid",
-          "groupBy": [
-            {
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }
-          ],
-          "measurement": "amountSpent",
-          "orderByTime": "ASC",
-          "policy": "autogen",
-          "queryType": "randomWalk",
-          "refId": "M",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "cumulative_sum"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "projectid",
-              "operator": "=",
-              "value": "TH"
-            },
-            {
-              "condition": "AND",
-              "key": "platform",
-              "operator": "=",
-              "value": "AWS"
-            }
-          ]
-        },
-        {
-          "alias": "$tag_projectid",
-          "groupBy": [
-            {
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }
-          ],
-          "measurement": "amountSpent",
-          "orderByTime": "ASC",
-          "policy": "autogen",
-          "queryType": "randomWalk",
-          "refId": "N",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "cumulative_sum"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "projectid",
-              "operator": "=",
-              "value": "IT-DB-SAS"
-            },
-            {
-              "condition": "AND",
-              "key": "platform",
-              "operator": "=",
-              "value": "AWS"
-            }
-          ]
-        },
-        {
-          "alias": "$tag_projectid",
-          "groupBy": [
-            {
-              "params": [
-                "projectid"
-              ],
-              "type": "tag"
-            }
-          ],
-          "measurement": "amountSpent",
-          "orderByTime": "ASC",
-          "policy": "autogen",
-          "queryType": "randomWalk",
-          "refId": "O",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "cumulative_sum"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "projectid",
-              "operator": "=",
-              "value": "IT-DB-SAS"
-            },
-            {
-              "condition": "AND",
               "key": "platform",
               "operator": "=",
               "value": "AWS"
@@ -1413,10 +790,12 @@
           ]
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "AWS Total Consumption",
-      "type": "bargauge"
+      "thresholds": "0,10",
+      "title": "Number of AWS services per location",
+      "type": "grafana-worldmap-panel",
+      "unitPlural": "",
+      "unitSingle": "",
+      "valueName": "total"
     },
     {
       "aliasColors": {},
@@ -1431,10 +810,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 11,
+        "h": 8,
         "w": 14,
         "x": 0,
-        "y": 12
+        "y": 8
       },
       "hiddenSeries": false,
       "id": 3,
@@ -2190,10 +1569,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 11,
-        "w": 9,
+        "h": 10,
+        "w": 10,
         "x": 14,
-        "y": 12
+        "y": 13
       },
       "id": 5,
       "options": {
@@ -2880,6 +2259,718 @@
       "timeShift": null,
       "title": "AWS Mean Daily Consumption",
       "type": "piechart"
+    },
+    {
+      "datasource": "InfluxDB-remote",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 14,
+        "x": 0,
+        "y": 16
+      },
+      "id": 4,
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {}
+      },
+      "pluginVersion": "7.5.5",
+      "targets": [
+        {
+          "alias": "$tag_projectid",
+          "groupBy": [
+            {
+              "params": [
+                "projectid"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "amountSpent",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "queryType": "randomWalk",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "cumulative_sum"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "projectid",
+              "operator": "=",
+              "value": "Openlab"
+            },
+            {
+              "condition": "AND",
+              "key": "platform",
+              "operator": "=",
+              "value": "AWS"
+            }
+          ]
+        },
+        {
+          "alias": "$tag_projectid",
+          "groupBy": [
+            {
+              "params": [
+                "projectid"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "amountSpent",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "queryType": "randomWalk",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "cumulative_sum"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "projectid",
+              "operator": "=",
+              "value": "253635982411"
+            },
+            {
+              "condition": "AND",
+              "key": "platform",
+              "operator": "=",
+              "value": "AWS"
+            }
+          ]
+        },
+        {
+          "alias": "$tag_projectid",
+          "groupBy": [
+            {
+              "params": [
+                "projectid"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "amountSpent",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "queryType": "randomWalk",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "cumulative_sum"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "projectid",
+              "operator": "=",
+              "value": "622943311693"
+            },
+            {
+              "condition": "AND",
+              "key": "platform",
+              "operator": "=",
+              "value": "AWS"
+            }
+          ]
+        },
+        {
+          "alias": "$tag_projectid",
+          "groupBy": [
+            {
+              "params": [
+                "projectid"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "amountSpent",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "queryType": "randomWalk",
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "cumulative_sum"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "projectid",
+              "operator": "=",
+              "value": "ATLAS"
+            },
+            {
+              "condition": "AND",
+              "key": "platform",
+              "operator": "=",
+              "value": "AWS"
+            }
+          ]
+        },
+        {
+          "alias": "$tag_projectid",
+          "groupBy": [
+            {
+              "params": [
+                "projectid"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "amountSpent",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "queryType": "randomWalk",
+          "refId": "E",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "cumulative_sum"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "projectid",
+              "operator": "=",
+              "value": "CMS"
+            },
+            {
+              "condition": "AND",
+              "key": "platform",
+              "operator": "=",
+              "value": "AWS"
+            }
+          ]
+        },
+        {
+          "alias": "$tag_projectid",
+          "groupBy": [
+            {
+              "params": [
+                "projectid"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "amountSpent",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "queryType": "randomWalk",
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "cumulative_sum"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "projectid",
+              "operator": "=",
+              "value": "618456240250"
+            },
+            {
+              "condition": "AND",
+              "key": "platform",
+              "operator": "=",
+              "value": "AWS"
+            }
+          ]
+        },
+        {
+          "alias": "$tag_projectid",
+          "groupBy": [
+            {
+              "params": [
+                "projectid"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "amountSpent",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "queryType": "randomWalk",
+          "refId": "G",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "cumulative_sum"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "projectid",
+              "operator": "=",
+              "value": "EP-CMG"
+            },
+            {
+              "condition": "AND",
+              "key": "platform",
+              "operator": "=",
+              "value": "AWS"
+            }
+          ]
+        },
+        {
+          "alias": "$tag_projectid",
+          "groupBy": [
+            {
+              "params": [
+                "projectid"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "amountSpent",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "queryType": "randomWalk",
+          "refId": "H",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "cumulative_sum"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "projectid",
+              "operator": "=",
+              "value": "LHCb"
+            },
+            {
+              "condition": "AND",
+              "key": "platform",
+              "operator": "=",
+              "value": "AWS"
+            }
+          ]
+        },
+        {
+          "alias": "$tag_projectid",
+          "groupBy": [
+            {
+              "params": [
+                "projectid"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "amountSpent",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "queryType": "randomWalk",
+          "refId": "I",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "cumulative_sum"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "projectid",
+              "operator": "=",
+              "value": "IT-DB-IA"
+            },
+            {
+              "condition": "AND",
+              "key": "platform",
+              "operator": "=",
+              "value": "AWS"
+            }
+          ]
+        },
+        {
+          "alias": "$tag_projectid",
+          "groupBy": [
+            {
+              "params": [
+                "projectid"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "amountSpent",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "queryType": "randomWalk",
+          "refId": "J",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "cumulative_sum"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "projectid",
+              "operator": "=",
+              "value": "357458753298"
+            },
+            {
+              "condition": "AND",
+              "key": "platform",
+              "operator": "=",
+              "value": "AWS"
+            }
+          ]
+        },
+        {
+          "alias": "$tag_projectid",
+          "groupBy": [
+            {
+              "params": [
+                "projectid"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "amountSpent",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "queryType": "randomWalk",
+          "refId": "K",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "cumulative_sum"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "projectid",
+              "operator": "=",
+              "value": "ALICE"
+            },
+            {
+              "condition": "AND",
+              "key": "platform",
+              "operator": "=",
+              "value": "AWS"
+            }
+          ]
+        },
+        {
+          "alias": "$tag_projectid",
+          "groupBy": [
+            {
+              "params": [
+                "projectid"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "amountSpent",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "queryType": "randomWalk",
+          "refId": "L",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "cumulative_sum"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "projectid",
+              "operator": "=",
+              "value": "BE-OP_TE-ABT"
+            },
+            {
+              "condition": "AND",
+              "key": "platform",
+              "operator": "=",
+              "value": "AWS"
+            }
+          ]
+        },
+        {
+          "alias": "$tag_projectid",
+          "groupBy": [
+            {
+              "params": [
+                "projectid"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "amountSpent",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "queryType": "randomWalk",
+          "refId": "M",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "cumulative_sum"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "projectid",
+              "operator": "=",
+              "value": "TH"
+            },
+            {
+              "condition": "AND",
+              "key": "platform",
+              "operator": "=",
+              "value": "AWS"
+            }
+          ]
+        },
+        {
+          "alias": "$tag_projectid",
+          "groupBy": [
+            {
+              "params": [
+                "projectid"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "amountSpent",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "queryType": "randomWalk",
+          "refId": "N",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "cumulative_sum"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "projectid",
+              "operator": "=",
+              "value": "IT-DB-SAS"
+            },
+            {
+              "condition": "AND",
+              "key": "platform",
+              "operator": "=",
+              "value": "AWS"
+            }
+          ]
+        },
+        {
+          "alias": "$tag_projectid",
+          "groupBy": [
+            {
+              "params": [
+                "projectid"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "amountSpent",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "queryType": "randomWalk",
+          "refId": "O",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "cumulative_sum"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "projectid",
+              "operator": "=",
+              "value": "IT-DB-SAS"
+            },
+            {
+              "condition": "AND",
+              "key": "platform",
+              "operator": "=",
+              "value": "AWS"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "AWS Total Consumption",
+      "type": "bargauge"
     }
   ],
   "schemaVersion": 27,
@@ -2896,7 +2987,7 @@
   "timezone": "",
   "title": "Amazon Web Services",
   "uid": "ogAWSKgnz",
-  "version": 13
+  "version": 28
 },
   "folderId": 0,
   "overwrite": true

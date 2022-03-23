@@ -16,7 +16,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 1,
+  "id": 2,
   "links": [],
   "panels": [
     {
@@ -481,7 +481,7 @@
               "type": "tag"
             }
           ],
-          "measurement": "Location",
+          "measurement": "location",
           "orderByTime": "ASC",
           "policy": "autogen",
           "queryType": "randomWalk",
@@ -497,195 +497,20 @@
               },
               {
                 "params": [],
-                "type": "sum"
+                "type": "cumulative_sum"
               }
             ]
           ],
           "tags": [
             {
-              "key": "location",
+              "key": "platform",
               "operator": "=",
-              "value": "BE"
-            }
-          ]
-        },
-        {
-          "alias": "$tag_location",
-          "groupBy": [
-            {
-              "params": [
-                "location"
-              ],
-              "type": "tag"
-            }
-          ],
-          "hide": false,
-          "measurement": "Location",
-          "orderByTime": "ASC",
-          "policy": "autogen",
-          "queryType": "randomWalk",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "location",
-              "operator": "=",
-              "value": "DE"
-            }
-          ]
-        },
-        {
-          "alias": "$tag_location",
-          "groupBy": [
-            {
-              "params": [
-                "location"
-              ],
-              "type": "tag"
-            }
-          ],
-          "hide": false,
-          "measurement": "Location",
-          "orderByTime": "ASC",
-          "policy": "autogen",
-          "queryType": "randomWalk",
-          "refId": "C",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "location",
-              "operator": "=",
-              "value": "IE"
-            }
-          ]
-        },
-        {
-          "alias": "$tag_location",
-          "groupBy": [
-            {
-              "params": [
-                "location"
-              ],
-              "type": "tag"
-            }
-          ],
-          "hide": false,
-          "measurement": "Location",
-          "orderByTime": "ASC",
-          "policy": "autogen",
-          "queryType": "randomWalk",
-          "refId": "D",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "location",
-              "operator": "=",
-              "value": "NL"
-            }
-          ]
-        },
-        {
-          "alias": "$tag_location",
-          "groupBy": [
-            {
-              "params": [
-                "location"
-              ],
-              "type": "tag"
-            }
-          ],
-          "hide": false,
-          "measurement": "Location",
-          "orderByTime": "ASC",
-          "policy": "autogen",
-          "queryType": "randomWalk",
-          "refId": "E",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "location",
-              "operator": "=",
-              "value": "SG"
-            }
-          ]
-        },
-        {
-          "alias": "$tag_location",
-          "groupBy": [
-            {
-              "params": [
-                "location"
-              ],
-              "type": "tag"
-            }
-          ],
-          "hide": false,
-          "measurement": "Location",
-          "orderByTime": "ASC",
-          "policy": "autogen",
-          "queryType": "randomWalk",
-          "refId": "F",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "location",
-              "operator": "=",
-              "value": "US"
+              "value": "GCP"
             }
           ]
         }
       ],
-      "thresholds": "3000",
+      "thresholds": "500",
       "title": "Number of GCP services per Location",
       "type": "grafana-worldmap-panel",
       "unitPlural": "",
@@ -1554,7 +1379,7 @@
   "timezone": "",
   "title": "Google Cloud Platform",
   "uid": "7CirYdR7k",
-  "version": 33
+  "version": 3
 },
   "folderId": 0,
   "overwrite": true
