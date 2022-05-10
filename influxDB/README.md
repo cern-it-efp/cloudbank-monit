@@ -8,7 +8,7 @@ For the initial data (consumption per project), the decided data schema is (show
 
 The initial string, `amountSpent` indicates the database measurement.
 
-The tags are projectid and platform and only the amount spent is a value field. The reason behind that decision is that tags are indexed while fields are not. According to the [official docs](https://docs.influxdata.com/influxdb/v1.8/concepts/key_concepts/), in general, fields should not contain commonly-queried metadata.
+The tags are `projectid` and `platform` and only the amount spent is a value field. The reason behind that decision is that tags are indexed while fields are not. According to the [official docs](https://docs.influxdata.com/influxdb/v1.8/concepts/key_concepts/), in general, fields should not contain commonly-queried metadata.
 
 The Integer at the end of the line is a timestamp in Unix time - nanoseconds since January 1, 1970 UTC. That timestamp is optional, If you do not specify a timestamp, InfluxDB uses the server’s local nanosecond timestamp in Unix epoch. Time in InfluxDB is in UTC format by default.
 

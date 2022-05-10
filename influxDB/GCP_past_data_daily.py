@@ -7,8 +7,8 @@ from google.cloud import bigquery
 from enum import Enum
 import sys
 
-BQtable =  "sbsl_cern_billing_info.gcp_billing_export_v1_012C54_B3DAFC_973FAF"
 
+BQtable =  "sbsl_cern_billing_info.gcp_billing_export_v1_012C54_B3DAFC_973FAF"
 Period = Enum('Period', 'DAY MONTH')
 
 def getQuery(table=BQtable, period=Period.DAY):

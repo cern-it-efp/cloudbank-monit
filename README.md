@@ -17,7 +17,7 @@ This application runs in CERN Openshift and is conformed by the following core c
   - GCP Exporter: gets billing data from GCP's BigQuery.
 - InfluxDB: data persistence.
 
-The architecture can be seen here: https://docs.google.com/drawings/d/1ISj875a-NIbcUbeLoM_zsnIOGmBgAniiuhPbJaJDB5I
+![Monitoring Platform Architecture](img/arch.png)
 
 ## Deployment
 
@@ -28,5 +28,3 @@ Refer to the [Openshift](openshift) folder.
 Copyright (C) CERN.
 
 Licensed under GNU Affero General Public License.
-
-

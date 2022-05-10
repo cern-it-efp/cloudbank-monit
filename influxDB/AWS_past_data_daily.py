@@ -13,8 +13,7 @@ import numpy as np
 import json
 from datetime import datetime, date, timedelta
 
-local_path = "/tmp" # Ignacio
-
+local_path = "/tmp"
 aws_access_key_id=""
 aws_secret_access_key=""
 
